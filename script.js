@@ -994,3 +994,260 @@ async function loadTournamentDetails() {
         if (loading) loading.style.display = 'none';
     }
 }
+// Simulated API for teams (assumed from tournament.html)
+const api = {
+  getTeams: async () => {
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return [
+          {
+              id: 1,
+              name: "Team Alpha",
+              logo: "/api/placeholder/100/100",
+              captain: "AlphaLeader",
+              players: [
+                  { nickname: "AlphaLeader", role: "IGL", stats: { kills: 120, deaths: 80 } },
+                  { nickname: "BetaFragger", role: "Entry", stats: { kills: 100, deaths: 90 } },
+                  { nickname: "GammaSniper", role: "AWPer", stats: { kills: 80, deaths: 60 } },
+                  { nickname: "DeltaSupport", role: "Support", stats: { kills: 70, deaths: 85 } },
+                  { nickname: "EpsilonLurker", role: "Lurker", stats: { kills: 90, deaths: 70 } }
+              ],
+              socials: { tiktok: "team_alpha", twitch: "team_alpha" },
+              description: "A fierce team ready to dominate!"
+          },
+          // Add more teams as needed
+      ];
+  }
+};
+
+// Hamburger Menu Toggle (assumed existing)
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.querySelector('.hamburger');
+  const nav = document.querySelector('nav');
+  hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      hamburger.classList.toggle('active');
+  });
+});
+
+// Teams Page: Load Teams Dynamically
+function loadTeams() {
+  const teamsContainer = document.getElementById('teams-container');
+  const loading = document.getElementById('loading');
+  const errorMessage = document.getElementById('error-message');
+
+  if (!teamsContainer) return;
+
+  loading.style.display = 'block';
+  errorMessage.style.display = 'none';
+
+  api.getTeams()
+      .then(teams => {
+          loading.style.display = 'none';
+          teamsContainer.innerHTML = teams.map(team => `
+              <div class="team">
+                  <div class="team-header">
+                      <div class="team-logo">
+                          <img src="${team.logo}" alt="${team.name} Logo">
+                      </div>
+                      <div class="team-info">
+                          <h3>${team.name}</h3>
+                          <div class="team-meta">
+                              <span><i class="fas fa-user"></i> Капитан: ${team.captain}</span>
+                          </div>
+                          <div class="team-social">
+                              ${team.socials.tiktok ? `<a href="https://tiktok.com/@${team.socials.tiktok}" target="_blank"><i class="fab fa-tiktok"></i></a>` : ''}
+                              ${team.socials.twitch ? `<a href="https://twitch.tv/${team.socials.twitch}" target="_blank"><i class="fab fa-twitch"></i></a>` : ''}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="team-description">
+                      <p>${team.description}</p>
+                  </div>
+                  <div class="team-players">
+                      <h4>Играчи</h4>
+                      <div class="players-grid">
+                          ${team.players.map(player => `
+                              <div class="player">
+                                  <div class="player-img">
+                                      <img src="/api/placeholder/80/80" alt="${player.nickname}">
+                                  </div>
+                                  <div class="player-info">
+                                      <h5>${player.nickname}</h5>
+                                      <p class="player-role">${player.role}</p>
+                                      <div class="player-stats">
+                                          <span>Убийства: ${player.stats.kills}</span>
+                                          <span>Смърти: ${player.stats.deaths}</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          `).join('')}
+                      </div>
+                  </div>
+              </div>
+          `).join('');
+      })
+      .catch(error => {
+          loading.style.display = 'none';
+          errorMessage.style.display = 'block';
+          errorMessage.textContent = 'Грешка при зареждане на отборите. Моля, опитайте отново.';
+          console.error('Error loading teams:', error);
+      });
+}
+
+// Rules Page: Collapsible Sections
+function initializeCollapsibleSections() {
+  const collapsibles = document.querySelectorAll('.rule-section.collapsible');
+  collapsibles.forEach(section => {
+      const header = section.querySelector('h3');
+      header.addEventListener('click', () => {
+          section.classList.toggle('active');
+      });
+  });
+}
+
+// Contacts Page: FAQ Toggles
+function initializeFAQToggles() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+          item.classList.toggle('active');
+      });
+  });
+}
+
+// Registration Page: Form Validation and Submission
+function initializeRegistrationForm() {
+  const form = document.getElementById('registration-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const loading = document.getElementById('form-loading');
+      const error = document.getElementById('form-error');
+      const success = document.getElementById('form-success');
+
+      // Reset messages
+      error.style.display = 'none';
+      success.style.display = 'none';
+      loading.style.display = 'block';
+
+      // Basic client-side validation
+      let isValid = true;
+      const requiredFields = form.querySelectorAll('[required]');
+      requiredFields.forEach(field => {
+          const errorMessage = document.getElementById(`${field.id}-error`);
+          if (!field.value.trim()) {
+              field.parentElement.classList.add('error');
+              errorMessage.textContent = 'Това поле е задължително.';
+              isValid = false;
+          } else {
+              field.parentElement.classList.remove('error');
+              errorMessage.textContent = '';
+          }
+      });
+
+      // Email validation
+      const emailField = document.getElementById('captain-email');
+      const emailError = document.getElementById('captain-email-error');
+      if (emailField.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
+          emailField.parentElement.classList.add('error');
+          emailError.textContent = 'Моля, въведете валиден имейл адрес.';
+          isValid = false;
+      }
+
+      if (!isValid) {
+          loading.style.display = 'none';
+          error.style.display = 'block';
+          error.textContent = 'Моля, попълнете всички задължителни полета коректно.';
+          return;
+      }
+
+      try {
+          // Simulate API submission
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          loading.style.display = 'none';
+          success.style.display = 'block';
+          success.textContent = 'Вашият отбор беше регистриран успешно! Ще получите потвърждение по имейл.';
+          form.reset();
+      } catch (err) {
+          loading.style.display = 'none';
+          error.style.display = 'block';
+          error.textContent = 'Грешка при регистрацията. Моля, опитайте отново.';
+      }
+  });
+}
+
+// Contacts Page: Contact Form Submission
+function initializeContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const loading = document.getElementById('form-loading');
+      const error = document.getElementById('form-error');
+      const success = document.getElementById('form-success');
+
+      // Reset messages
+      error.style.display = 'none';
+      success.style.display = 'none';
+      loading.style.display = 'block';
+
+      // Basic client-side validation
+      let isValid = true;
+      const requiredFields = form.querySelectorAll('[required]');
+      requiredFields.forEach(field => {
+          const errorMessage = document.getElementById(`${field.id}-error`);
+          if (!field.value.trim()) {
+              field.parentElement.classList.add('error');
+              errorMessage.textContent = 'Това поле е задължително.';
+              isValid = false;
+          } else {
+              field.parentElement.classList.remove('error');
+              errorMessage.textContent = '';
+          }
+      });
+
+      // Email validation
+      const emailField = document.getElementById('contact-email');
+      const emailError = document.getElementById('contact-email-error');
+      if (emailField.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
+          emailField.parentElement.classList.add('error');
+          emailError.textContent = 'Моля, въведете валиден имейл адрес.';
+          isValid = false;
+      }
+
+      if (!isValid) {
+          loading.style.display = 'none';
+          error.style.display = 'block';
+          error.textContent = 'Моля, попълнете всички задължителни полета коректно.';
+          return;
+      }
+
+      try {
+          // Simulate API submission
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          loading.style.display = 'none';
+          success.style.display = 'block';
+          success.textContent = 'Вашето съобщение беше изпратено успешно!';
+          form.reset();
+      } catch (err) {
+          loading.style.display = 'none';
+          error.style.display = 'block';
+          error.textContent = 'Грешка при изпращането. Моля, опитайте отново.';
+      }
+  });
+}
+
+// Initialize Page-Specific Functionality
+document.addEventListener('DOMContentLoaded', () => {
+  loadTeams();
+  initializeCollapsibleSections();
+  initializeFAQToggles();
+  initializeRegistrationForm();
+  initializeContactForm();
+});
