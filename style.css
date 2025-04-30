@@ -1399,3 +1399,136 @@ footer::before {
     border-left: 4px solid var(--primary-color);
     margin: 20px 0;
   }
+  /* Предишните стилове остават непроменени, добавяме следните в края на файла */
+
+/* Предишните стилове остават непроменени, добавяме или модифицираме следните */
+
+/* Стил за списък с отбори */
+.teams-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.team {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(27, 232, 212, 0.1);
+}
+
+.team h4 {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.team ul {
+    list-style: none;
+    padding: 0;
+}
+
+.team li {
+    color: var(--light-color);
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* Стил за секция Награди */
+.prizes-container {
+    background-color: rgba(18, 18, 18, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.prizes-container p {
+    color: var(--light-color);
+    font-size: 16px;
+}
+
+.sponsors {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.sponsors h3 {
+    color: var(--primary-color);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.sponsors p {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* Стил за турнирна схема (без промяна) */
+.bracket-container {
+    background-color: rgba(18, 18, 18, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    overflow-x: auto;
+}
+
+.bracket-match {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(27, 232, 212, 0.1);
+    transition: var(--transition);
+}
+
+.bracket-match:hover {
+    border-color: var(--secondary-color);
+    box-shadow: var(--glow);
+}
+
+.match-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.match-round {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+.match-teams {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.team {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 5px;
+}
+
+.team.winner {
+    background-color: rgba(27, 232, 212, 0.1);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.team span {
+    font-size: 16px;
+    color: var(--light-color);
+}
+
+.score {
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.match-date {
+    font-size: 14px;
+    color: #aaa;
+}
