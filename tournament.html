@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS Турнири | Турнир</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span>TikTok CS 1.6</span> Турнир - BG
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Начало</a></li>
+                <li><a href="tournament.html" class="active">Турнир</a></li>
+                <li><a href="teams.html">Отбори</a></li>
+                <li><a href="rules.html">Правила</a></li>
+                <li><a href="registration.html">Регистрация</a></li>
+                <li><a href="contacts.html">Контакти</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <section class="page-banner">
+        <div class="banner-content">
+            <h1>ПРЕДСТОЯЩ ТУРНИР</h1>
+            <p id="tournament-name">CS 1.6 Турнир за Тиктокъри 2025</p>
+        </div>
+    </section>
+
+    <section class="tournament-details">
+        <div class="container">
+            <div class="tournament-header" id="tournament-header">
+                <div class="tournament-logo">
+                    <img src="/api/placeholder/150/150" alt="Лого на турнира">
+                </div>
+                <div class="tournament-title">
+                    <h2 id="tournament-title">CS 1.6 Турнир за Тиктокъри 2025</h2>
+                    <div class="tournament-meta">
+                        <span><i class="fas fa-calendar-alt"></i> <span id="tournament-date">03.05.2025</span></span>
+                        <span><i class="fas fa-clock"></i> <span id="tournament-time">14:00 ч.</span></span>
+                        <span><i class="fas fa-map-marker-alt"></i> <span id="tournament-location">Онлайн</span></span>
+                        <span><i class="fas fa-gamepad"></i> <span id="tournament-game">Counter-Strike 1.6</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="countdown-timer tournament-page">
+                <div class="timer-item">
+                    <span id="t-days">00</span>
+                    <p>Дни</p>
+                </div>
+                <div class="timer-item">
+                    <span id="t-hours">00</span>
+                    <p>Часа</p>
+                </div>
+                <div class="timer-item">
+                    <span id="t-minutes">00</span>
+                    <p>Минути</p>
+                </div>
+                <div class="timer-item">
+                    <span id="t-seconds">00</span>
+                    <p>Секунди</p>
+                </div>
+            </div>
+
+            <div class="tournament-info-tabs">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="overview">Общ преглед</button>
+                    <button class="tab-btn" data-tab="schedule">Програма</button>
+                    <button class="tab-btn" data-tab="bracket">Схема</button>
+                    <button class="tab-btn" data-tab="prizes">Награди</button>
+                </div>
+
+                <div class="tab-content active" id="overview">
+                    <div class="overview-grid">
+                        <div class="overview-card">
+                            <h3>За турнира</h3>
+                            <p id="tournament-description">Първият официален турнир на CS Турнири ще събере топ тиктокъри гейминг стриймъри, които ще се изправят един срещу друг в легендарната игра Counter-Strike 1.6. Два отбора ще се състезават за голямата награда в серия от вълнуващи мачове, които ще бъдат излъчвани на живо.</p>
+                            <p>Турнирът ще се проведе изцяло онлайн и всеки може да гледа на живо чрез нашите канали в Twitch и YouTube.</p>
+                        </div>
+                        <div class="overview-card">
+                            <h3>Формат</h3>
+                            <ul class="tournament-format">
+                                <li><span>Брой отбори:</span> <span id="tournament-teams">2 отбора</span></li>
+                                <li><span>Играчи в отбор:</span> 5 играчи</li>
+                                <li><span>Формат:</span> Bo5 (Best of 5)</li>
+                                <li><span>Карти:</span> de_dust2, de_inferno, de_nuke, de_train, de_mirage</li>
+                                <li><span>Режим:</span> 5v5 Standard</li>
+                            </ul>
+                        </div>
+                        <div class="overview-card">
+                            <h3>Стрийминг</h3>
+                            <p>Всички мачове ще бъдат излъчвани на живо на нашите официални канали:</p>
+                            <div class="stream-links">
+                                <a href="#" class="stream-btn twitch"><i class="fab fa-twitch"></i> Twitch</a>
+                                <a href="#" class="stream-btn youtube"><i class="fab fa-youtube"></i> YouTube</a>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <h3>Коментатори</h3>
+                            <div class="commentators">
+                                <div class="commentator">
+                                    <img src="/api/placeholder/100/100" alt="Коментатор 1">
+                                    <h4>Иван Петров</h4>
+                                    <p>Главен коментатор</p>
+                                </div>
+                                <div class="commentator">
+                                    <img src="/api/placeholder/100/100" alt="Коментатор 2">
+                                    <h4>Мария Тодорова</h4>
+                                    <p>Анализатор</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="schedule">
+                    <h3>Програма на турнира</h3>
+                    <div class="schedule-list" id="tournament-schedule">
+                        <!-- Schedule will be dynamically loaded -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="bracket">
+                    <h3>Турнирна схема</h3>
+                    <div class="bracket-container" id="tournament-bracket">
+                        <!-- Bracket will be dynamically loaded -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="prizes">
+                    <h3>Награден фонд</h3>
+                    <div class="prizes-container">
+                        <div class="prize-item first-place">
+                            <div class="prize-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="prize-details">
+                                <h4>1-во място</h4>
+                                <p class="prize-amount">5,000 лв.</p>
+                                <p class="prize-extra">+ Гейминг периферия от спонсорите</p>
+                            </div>
+                        </div>
+                        <div class="prize-item second-place">
+                            <div class="prize-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div class="prize-details">
+                                <h4>2-ро място</h4>
+                                <p class="prize-amount">2,500 лв.</p>
+                                <p class="prize-extra">+ Гейминг периферия от спонсорите</p>
+                            </div>
+                        </div>
+                        <div class="prize-item mvp">
+                            <div class="prize-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="prize-details">
+                                <h4>MVP на турнира</h4>
+                                <p class="prize-amount">1,000 лв.</p>
+                                <p class="prize-extra">+ Специална награда от спонсорите</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sponsors">
+                        <h3>Спонсори на турнира</h3>
+                        <div class="sponsors-list">
+                            <div class="sponsor">
+                                <img src="/api/placeholder/150/80" alt="Спонсор 1">
+                            </div>
+                            <div class="sponsor">
+                                <img src="/api/placeholder/150/80" alt="Спонсор 2">
+                            </div>
+                            <div class="sponsor">
+                                <img src="/api/placeholder/150/80" alt="Спонсор 3">
+                            </div>
+                            <div class="sponsor">
+                                <img src="/api/placeholder/150/80" alt="Спонсор 4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="loading" id="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="error-message" id="error-message" style="display: none;"></div>
+        </div>
+    </section>
+
+    <section class="tournament-cta">
+        <div class="container">
+            <h2>Искаш да следиш турнира?</h2>
+            <p>Абонирай се за нашите известия, за да не пропуснеш нищо!</p>
+            <div class="cta-buttons">
+                <a href="registration.html" class="cta-button primary">Регистрирай се</a>
+                <a href="#" class="cta-button secondary">Добави в календара</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <div class="logo">
+                        <span>TikTok CS 1.6</span> Турнир - BG
+                    </div>
+                    <p>Организираме професионални CS 1.6 турнири и работим за развитието на гейминг общността в България.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitch"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Бързи връзки</h3>
+                    <ul>
+                        <li><a href="index.html">Начало</a></li>
+                        <li><a href="tournament.html">Турнир</a></li>
+                        <li><a href="teams.html">Отбори</a></li>
+                        <li><a href="rules.html">Правила</a></li>
+                        <li><a href="registration.html">Регистрация</a></li>
+                        <li><a href="contacts.html">Контакти</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact">
+                    <h3>Контакти</h3>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@cstournaments.bg">info@cstournaments.bg</a></p>
+                    <p><i class="fas fa-phone"></i> +359 88 123 4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> София, България</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TikTok CS 1.6 Турнир – BG | Всички права запазени</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

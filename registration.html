@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok CS 1.6 Турнир - BG | Регистрация</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span>TikTok CS 1.6</span> Турнир - BG
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Начало</a></li>
+                <li><a href="tournament.html">Турнир</a></li>
+                <li><a href="teams.html">Отбори</a></li>
+                <li><a href="rules.html">Правила</a></li>
+                <li><a href="registration.html" class="active">Регистрация</a></li>
+                <li><a href="contacts.html">Контакти</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <section class="page-banner">
+        <div class="banner-content">
+            <h1>РЕГИСТРАЦИЯ</h1>
+            <p>Запишете своя отбор за участие в турнира</p>
+        </div>
+    </section>
+
+    <section class="registration">
+        <div class="container">
+            <div class="registration-intro">
+                <h2>Регистрация за участие</h2>
+                <p>Попълнете формуляра по-долу, за да регистрирате своя отбор за предстоящия TikTok CS 1.6 турнир на 03.05.2025. Моля, прочетете внимателно <a href="rules.html">правилата</a> преди да направите регистрация.</p>
+            </div>
+
+            <div class="registration-form-container">
+                <form id="registration-form" class="registration-form">
+                    <div class="form-section">
+                        <h3>Информация за отбора</h3>
+                        <div class="form-group">
+                            <label for="team-name">Име на отбора <span class="required">*</span></label>
+                            <input type="text" id="team-name" name="team-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="team-logo">Лого на отбора (URL или файл)</label>
+                            <input type="file" id="team-logo" name="team-logo" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label for="team-description">Кратко описание на отбора</label>
+                            <textarea id="team-description" name="team-description" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="team-socials">Социални медии на отбора (по избор)</label>
+                            <div class="social-input">
+                                <i class="fab fa-tiktok"></i>
+                                <input type="text" id="team-tiktok" name="team-tiktok" placeholder="TikTok профил">
+                            </div>
+                            <div class="social-input">
+                                <i class="fab fa-youtube"></i>
+                                <input type="text" id="team-youtube" name="team-youtube" placeholder="YouTube канал">
+                            </div>
+                            <div class="social-input">
+                                <i class="fab fa-twitch"></i>
+                                <input type="text" id="team-twitch" name="team-twitch" placeholder="Twitch канал">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Данни за капитана</h3>
+                        <div class="form-group">
+                            <label for="captain-name">Име и фамилия <span class="required">*</span></label>
+                            <input type="text" id="captain-name" name="captain-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="captain-email">Имейл адрес <span class="required">*</span></label>
+                            <input type="email" id="captain-email" name="captain-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="captain-phone">Телефон за връзка <span class="required">*</span></label>
+                            <input type="tel" id="captain-phone" name="captain-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="captain-tiktok">TikTok профил <span class="required">*</span></label>
+                            <input type="text" id="captain-tiktok" name="captain-tiktok" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Играчи</h3>
+                        <p>Моля, въведете данни за всички 5 играчи (включително капитана)</p>
+                        
+                        <div class="players-form">
+                            <!-- Играч 1 (Капитан) -->
+                            <div class="player-info">
+                                <h4>Играч 1 (Капитан)</h4>
+                                <div class="form-group">
+                                    <label for="player1-nickname">Никнейм в играта <span class="required">*</span></label>
+                                    <input type="text" id="player1-nickname" name="player1-nickname" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player1-role">Роля в отбора</label>
+                                    <select id="player1-role" name="player1-role">
+                                        <option value="igl">IGL (In-Game Leader)</option>
+                                        <option value="entry">Entry Fragger</option>
+                                        <option value="awper">AWPer</option>
+                                        <option value="support">Support</option>
+                                        <option value="lurker">Lurker</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player1-steamid">Steam ID <span class="required">*</span></label>
+                                    <input type="text" id="player1-steamid" name="player1-steamid" required>
+                                </div>
+                            </div>
+
+                            <!-- Играч 2 -->
+                            <div class="player-info">
+                                <h4>Играч 2</h4>
+                                <div class="form-group">
+                                    <label for="player2-name">Име и фамилия <span class="required">*</span></label>
+                                    <input type="text" id="player2-name" name="player2-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player2-nickname">Никнейм в играта <span class="required">*</span></label>
+                                    <input type="text" id="player2-nickname" name="player2-nickname" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player2-role">Роля в отбора</label>
+                                    <select id="player2-role" name="player2-role">
+                                        <option value="igl">IGL (In-Game Leader)</option>
+                                        <option value="entry">Entry Fragger</option>
+                                        <option value="awper">AWPer</option>
+                                        <option value="support">Support</option>
+                                        <option value="lurker">Lurker</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player2-steamid">Steam ID <span class="required">*</span></label>
+                                    <input type="text" id="player2-steamid" name="player2-steamid" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player2-tiktok">TikTok профил <span class="required">*</span></label>
+                                    <input type="text" id="player2-tiktok" name="player2-tiktok" required>
+                                </div>
+                            </div>
+
+                            <!-- Играч 3 -->
+                            <div class="player-info">
+                                <h4>Играч 3</h4>
+                                <div class="form-group">
+                                    <label for="player3-name">Име и фамилия <span class="required">*</span></label>
+                                    <input type="text" id="player3-name" name="player3-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player3-nickname">Никнейм в играта <span class="required">*</span></label>
+                                    <input type="text" id="player3-nickname" name="player3-nickname" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player3-role">Роля в отбора</label>
+                                    <select id="player3-role" name="player3-role">
+                                        <option value="igl">IGL (In-Game Leader)</option>
+                                        <option value="entry">Entry Fragger</option>
+                                        <option value="awper">AWPer</option>
+                                        <option value="support">Support</option>
+                                        <option value="lurker">Lurker</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player3-steamid">Steam ID <span class="required">*</span></label>
+                                    <input type="text" id="player3-steamid" name="player3-steamid" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player3-tiktok">TikTok профил <span class="required">*</span></label>
+                                    <input type="text" id="player3-tiktok" name="player3-tiktok" required>
+                                </div>
+                            </div>
+
+                            <!-- Играч 4 -->
+                            <div class="player-info">
+                                <h4>Играч 4</h4>
+                                <div class="form-group">
+                                    <label for="player4-name">Име и фамилия <span class="required">*</span></label>
+                                    <input type="text" id="player4-name" name="player4-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player4-nickname">Никнейм в играта <span class="required">*</span></label>
+                                    <input type="text" id="player4-nickname" name="player4-nickname" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player4-role">Роля в отбора</label>
+                                    <select id="player4-role" name="player4-role">
+                                        <option value="igl">IGL (In-Game Leader)</option>
+                                        <option value="entry">Entry Fragger</option>
+                                        <option value="awper">AWPer</option>
+                                        <option value="support">Support</option>
+                                        <option value="lurker">Lurker</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player4-steamid">Steam ID <span class="required">*</span></label>
+                                    <input type="text" id="player4-steamid" name="player4-steamid" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player4-tiktok">TikTok профил <span class="required">*</span></label>
+                                    <input type="text" id="player4-tiktok" name="player4-tiktok" required>
+                                </div>
+                            </div>
+
+                            <!-- Играч 5 -->
+                            <div class="player-info">
+                                <h4>Играч 5</h4>
+                                <div class="form-group">
+                                    <label for="player5-name">Име и фамилия <span class="required">*</span></label>
+                                    <input type="text" id="player5-name" name="player5-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player5-nickname">Никнейм в играта <span class="required">*</span></label>
+                                    <input type="text" id="player5-nickname" name="player5-nickname" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player5-role">Роля в отбора</label>
+                                    <select id="player5-role" name="player5-role">
+                                        <option value="igl">IGL (In-Game Leader)</option>
+                                        <option value="entry">Entry Fragger</option>
+                                        <option value="awper">AWPer</option>
+                                        <option value="support">Support</option>
+                                        <option value="lurker">Lurker</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player5-steamid">Steam ID <span class="required">*</span></label>
+                                    <input type="text" id="player5-steamid" name="player5-steamid" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player5-tiktok">TikTok профил <span class="required">*</span></label>
+                                    <input type="text" id="player5-tiktok" name="player5-tiktok" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Потвърждение</h3>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="rules-agreement" name="rules-agreement" required>
+                            <label for="rules-agreement">Прочетох и приемам <a href="rules.html">правилата на турнира</a> <span class="required">*</span></label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="data-agreement" name="data-agreement" required>
+                            <label for="data-agreement">Съгласен съм личните данни да бъдат използвани за целите на турнира <span class="required">*</span></label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">Желая да получавам информация за бъдещи турнири и събития</label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="cta-button primary">Регистрирай отбора</button>
+                        <button type="reset" class="cta-button secondary">Изчисти формата</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="registration-note">
+                <h3><i class="fas fa-info-circle"></i> Важна информация</h3>
+                <p>След изпращане на формуляра, ще получите имейл за потвърждение на вашата регистрация. Моля, проверете и папката "Спам", ако не получите имейл в рамките на 24 часа.</p>
+                <p>За въпроси относно регистрацията, моля, свържете се с нас на <a href="mailto:info@cstournaments.bg">info@cstournaments.bg</a> или чрез <a href="contacts.html">контактната форма</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <div class="logo">
+                        <span>TikTok CS 1.6</span> Турнир - BG
+                    </div>
+                    <p>Организираме професионални CS 1.6 турнири и работим за развитието на гейминг общността в България.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitch"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Бързи връзки</h3>
+                    <ul>
+                        <li><a href="index.html">Начало</a></li>
+                        <li><a href="tournament.html">Турнир</a></li>
+                        <li><a href="teams.html">Отбори</a></li>
+                        <li><a href="rules.html">Правила</a></li>
+                        <li><a href="registration.html">Регистрация</a></li>
+                        <li><a href="contacts.html">Контакти</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact">
+                    <h3>Контакти</h3>
+                    <p><i class="fas fa-envelope"></i> info@cstournaments.bg</p>
+                    <p><i class="fas fa-phone"></i> +359 88 123 4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> София, България</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TikTok CS 1.6 Турнир - BG | Всички права запазени</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
