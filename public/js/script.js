@@ -97,31 +97,44 @@ function initCountdownTimer(tournamentDate) {
 
 async function loadLatestNews() {
   try {
-    const response = await fetch('/api/news/latest?limit=3');
-    if (response.ok) {
-      const news = await response.json();
-      renderNews(news);
-    } 
+      const response = await fetch('/api/news/latest');
+      if (response.ok) {
+          const news = await response.json();
+          renderNews(news);
+      } else {
+          console.error('Failed to load news');
+          renderNews([
+              {
+                  title: "Обявен е първият турнир за тиктокъри",
+                  content: "Първият турнир на CS Турнири ще се проведе с участието на известни тиктокъри...",
+                  imageurl: "/api/placeholder/400/250",
+                  createdAt: new Date()
+              },
+          ]);
+      }
   } catch (error) {
       console.error('Error loading news:', error);
-    }
+  }
 }
 
 function renderNews(newsItems) {
   const newsGrid = document.querySelector('.news-grid');
+  if (!newsGrid) return;
 
-  newsGrid.innerHTML = newsItems.map(news => `
-    <div class="news-item">
-      <div class="news-img">
-        <img src="${news.imageurl || 'images/default-news.jpg'}" alt="${news.title}">
+  const latestNews = newsItems.slice(0, 3);
+  
+  newsGrid.innerHTML = latestNews.map(news => `
+      <div class="news-item">
+          <div class="news-img">
+              <img src="${news.imageurl}" alt="${news.title}">
+          </div>
+          <div class="news-content">
+              <span class="date">${new Date(news.createdAt).toLocaleDateString('bg-BG')}</span>
+              <h3>${news.title}</h3>
+              <p>${news.content.substring(0, 100)}${news.content.length > 100 ? '...' : ''}</p>
+              <a href="#" class="read-more">Прочети повече</a>
+          </div>
       </div>
-      <div class="news-content">
-        <span class="date">${new Date(news.date).toLocaleDateString('bg-BG')}</span>
-        <h3>${news.title}</h3>
-        <p>${news.content.substring(0, 100)}${news.content.length > 100 ? '...' : ''}</p>
-        <a href="#" class="read-more">Прочети повече</a>
-      </div>
-    </div>
   `).join('');
 }
 
@@ -852,7 +865,8 @@ const db = {
   }
   // admin.js
 document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm');
+  loadLatestNews();
+  const loginForm = document.getElementById('loginForm');
     const dashboard = document.getElementById('dashboard');
     const tournamentsSection = document.getElementById('tournaments');
     

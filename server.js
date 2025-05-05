@@ -9,14 +9,21 @@ app.use(express.static('public'));
 //MongoDB connection
 // Connect to the database
 connectDB();
-// routes
-app.use('/api/login', require('./routes/auth'));
+// Routes
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/news', require('./routes/news'));
 app.use('/api/newsletter', require('./routes/newsletter'));
-app.use('/api/admin/tournaments', require('./routes/tournaments'));
-app.use('/api/admin/teams', require('./routes/teams'));
-app.use('/api/admin/registrations', require('./routes/registrations'));
+app.use('/api/tournaments', require('./routes/tournaments'));
+app.use('/api/teams', require('./routes/teams'));
+app.use('/api/registrations', require('./routes/registrations'));
 
-app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server is running on port ${process.env.PORT || 5000}`);
+// Error handling middleware (add this at the end)
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Something went wrong!' });
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

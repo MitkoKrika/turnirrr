@@ -30,19 +30,41 @@ document.addEventListener('DOMContentLoaded', () => {
         showDashboard();
     }
 
+    if (window.location.hash === '#news') {
+        loadNews();
+    }
+
     // Навигация
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            if (link.getAttribute('href') === '#logout') {
-                localStorage.removeItem('token');
-                window.location.href = '/login.html';
+            const section = link.getAttribute('href');
+            
+            if (section === '#logout') {
+                // Handle logout
                 return;
             }
+    
+            // Update active states
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
-            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-            document.querySelector(link.getAttribute('href')).classList.add('active');
+            
+            document.querySelectorAll('.content-section').forEach(s => {
+                s.classList.remove('active');
+            });
+            
+            const activeSection = document.querySelector(section);
+            if (activeSection) {
+                activeSection.classList.add('active');
+                
+                // Load data when specific sections are clicked
+                if (section === '#news') {
+                    loadNews();
+                } else if (section === '#tournaments') {
+                    loadTournaments();
+                }
+                // Add other sections as needed
+            }
         });
     });
 
@@ -227,25 +249,101 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Зареждане на новини
     async function loadNews() {
-        const news = await fetchData('/news');
-        renderNews(news);
+        try {
+            const response = await fetch('/api/news/admin', {
+                headers: { 
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            
+            // Check if we got valid data
+            if (result && Array.isArray(result.data)) {
+                renderNews(result.data);
+            } else {
+                console.error('Invalid data format:', result);
+                document.getElementById('news-table').innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center">Няма налични новини</td>
+                    </tr>
+                `;
+            }
+        } catch (error) {
+            console.error('Error loading news:', error);
+            document.getElementById('news-table').innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center error">Грешка при зареждане на новините</td>
+                </tr>
+            `;
+        }
     }
 
     // Рендиране на новини
     function renderNews(newsItems) {
         const tbody = document.getElementById('news-table');
-        tbody.innerHTML = newsItems.map(n => `
+        
+        if (!newsItems || newsItems.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center">Няма налични новини</td>
+                </tr>
+            `;
+            return;
+        }
+    
+        tbody.innerHTML = newsItems.map(news => `
             <tr>
-                <td>${n._id}</td>
-                <td>${n.title}</td>
-                <td>${new Date(n.date).toLocaleDateString('bg-BG')}</td>
-                <td>${n.author || 'Admin'}</td>
-                <td>
-                    <button class="btn btn-edit" onclick="openEditNews('${n._id}')">✏️</button>
-                    <button class="btn btn-delete" onclick="deleteNews('${n._id}')">🗑️</button>
+                <td>${news._id}</td>
+                <td>${news.title}</td>
+                <td>${formatDate(news.createdAt)}</td>
+                <td>${news.author || 'Администратор'}</td>
+                <td class="actions">
+                    <button class="btn btn-edit" onclick="editNews('${news._id}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-delete" onclick="deleteNews('${news._id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </td>
             </tr>
         `).join('');
+    }
+
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('bg-BG', options);
+    }
+
+    async function saveNews(newsData) {
+        try {
+            const response = await fetch('/api/news', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(newsData)
+            });
+    
+            if (response.ok) {
+                // Refresh the news list after successful save
+                await loadNews();
+                return true;
+            } else {
+                const error = await response.json();
+                throw new Error(error.message || 'Failed to save news');
+            }
+        } catch (error) {
+            console.error('Error saving news:', error);
+            alert(`Грешка при запазване: ${error.message}`);
+            return false;
+        }
     }
 
     // Зареждане на потребители
@@ -304,6 +402,45 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('news-form').reset();
             document.getElementById('news-modal-title').textContent = 'Добави новина';
             document.getElementById('news-modal').style.display = 'block';
+        });
+
+        document.getElementById('news-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const newsData = {
+                title: document.getElementById('news-title').value,
+                content: document.getElementById('news-content').value,
+                imageurl: document.getElementById('news-image').value || '/api/placeholder/400/250'
+            };
+            
+            const id = document.getElementById('news-id').value;
+            const isEdit = !!id;
+            
+            try {
+                const response = await fetch(isEdit ? `/api/news/${id}` : '/api/news', {
+                    method: isEdit ? 'PUT' : 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify(newsData)
+                });
+        
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Failed to save news');
+                }
+        
+                // Close modal and refresh news list
+                document.getElementById('news-modal').style.display = 'none';
+                document.getElementById('news-form').reset();
+                await loadNews();
+                
+                alert(`Новината е ${isEdit ? 'редактирана' : 'добавена'} успешно!`);
+            } catch (error) {
+                console.error('Грешка при запазване:', error);
+                alert(`Грешка при запазване: ${error.message}`);
+            }
         });
     
         document.querySelectorAll('.close-modal').forEach(btn => {
@@ -445,35 +582,38 @@ document.addEventListener('DOMContentLoaded', () => {
     if (newsForm) {
         newsForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const news = {
+            
+            const newsData = {
                 title: document.getElementById('news-title').value,
-                date: document.getElementById('news-date').value,
                 content: document.getElementById('news-content').value,
-                image: document.getElementById('news-image').value,
-                author: 'Администратор'
+                imageurl: document.getElementById('news-image').value || '/api/placeholder/400/250'
             };
+            
             const id = document.getElementById('news-id').value;
-
+            const url = id ? `/api/news/${id}` : '/api/news';
+            const method = id ? 'PUT' : 'POST';
+    
             try {
-                const url = id ? `/api/admin/news/${id}` : '/api/admin/news';
-                const method = id ? 'PUT' : 'POST';
                 const response = await fetch(url, {
                     method,
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify(news)
+                    body: JSON.stringify(newsData)
                 });
-
+    
                 if (response.ok) {
                     newsModal.style.display = 'none';
-                    loadNews();
+                    loadNews(); // Refresh news list in admin
+                    alert('Новината е запазена успешно!');
                 } else {
-                    alert('Грешка при запазване на новината');
+                    const errorData = await response.json();
+                    alert('Грешка при запазване: ' + (errorData.message || 'Неизвестна грешка'));
                 }
             } catch (error) {
                 console.error('Грешка при запазване:', error);
+                alert('Грешка при връзка със сървъра');
             }
         });
     }
@@ -657,21 +797,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // Редактиране на новина
     window.editNews = async (id) => {
         try {
-            const response = await fetch(`/api/admin/news/${id}`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+            const response = await fetch(`/api/news/${id}`, {
+                headers: { 
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                }
             });
-            if (response.ok) {
-                const news = await response.json();
-                document.getElementById('news-modal-title').textContent = 'Редактиране на новина';
-                document.getElementById('news-id').value = news._id;
-                document.getElementById('news-title').value = news.title;
-                document.getElementById('news-date').value = new Date(news.date).toISOString().slice(0, 10);
-                document.getElementById('news-content').value = news.content;
-                document.getElementById('news-image').value = news.image;
-                newsModal.style.display = 'block';
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+    
+            const news = await response.json();
+            
+            // Make sure the response contains the expected data
+            if (!news || !news._id) {
+                throw new Error('Invalid news data received');
+            }
+    
+            // Populate the edit form
+            document.getElementById('news-modal-title').textContent = 'Редактиране на новина';
+            document.getElementById('news-id').value = news._id;
+            document.getElementById('news-title').value = news.title;
+            document.getElementById('news-content').value = news.content;
+            document.getElementById('news-image').value = news.imageurl || '';
+            
+            // Show the modal
+            document.getElementById('news-modal').style.display = 'block';
         } catch (error) {
             console.error('Грешка при зареждане на новината:', error);
+            alert(`Грешка при зареждане на новината: ${error.message}`);
         }
     };
 
@@ -679,17 +834,20 @@ document.addEventListener('DOMContentLoaded', () => {
     window.deleteNews = async (id) => {
         if (confirm('Сигурни ли сте, че искате да изтриете тази новина?')) {
             try {
-                const response = await fetch(`/api/admin/news/${id}`, {
+                const response = await fetch(`/api/news/${id}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
+                
                 if (response.ok) {
                     loadNews();
+                    alert('Новината е изтрита успешно!');
                 } else {
                     alert('Грешка при изтриване');
                 }
             } catch (error) {
                 console.error('Грешка при изтриване:', error);
+                alert('Грешка при изтриване на новината');
             }
         }
     };
