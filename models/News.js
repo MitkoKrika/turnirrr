@@ -4,19 +4,22 @@ const newsSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-    },
-    date: {
-        type: Date,
-        default: Date.now,
+        trim: true
     },
     content: {
         type: String,
-        required: true,
+        required: true
     },
     imageurl: {
         type: String,
-        required: true,
+        default: '/api/placeholder/400/250'
     },
+    author: {
+        type: String,
+        default: 'Администратор'
+    }
+}, {
+    timestamps: true
 });
 
-const News = mongoose.model('News', newsSchema);
+module.exports = mongoose.model('News', newsSchema);
