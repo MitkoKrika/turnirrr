@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router();
 const News = require('../models/News');
 
+router.post('/', async (req, res) => {
+    try {
+        const newNews = new News(req.body);
+        await newNews.save();
+        res.status(201).json(newNews);
+    } catch (error) {
+        console.error('Грешка при създаване на новина:', error);
+        res.status(500).json({ message: 'Грешка при запазване на новината' });
+    }
+});
+
 router.get('latest', async (req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 3;
