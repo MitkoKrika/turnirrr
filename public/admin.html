@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Администраторски панел | CS Турнири</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Странично меню -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <span>CS</span>Турнири Админ
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li class="active"><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Табло</a></li>
+                    <li><a href="#tournaments"><i class="fas fa-trophy"></i> Турнири</a></li>
+                    <li><a href="#teams"><i class="fas fa-users"></i> Отбори</a></li>
+                    <li><a href="#registrations"><i class="fas fa-clipboard-list"></i> Регистрации</a></li>
+                    <li><a href="#news"><i class="fas fa-newspaper"></i> Новини</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog"></i> Настройки</a></li>
+                </ul>
+            </nav>
+            <div class="admin-logout">
+                <a href="#logout"><i class="fas fa-sign-out-alt"></i> Изход</a>
+            </div>
+        </aside>
+
+        <!-- Основно съдържание -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1>Администраторски панел</h1>
+                </div>
+                <div class="header-right">
+                    <div class="admin-search">
+                        <input type="text" placeholder="Търсене..." id="admin-search">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="admin-profile">
+                        <!-- <img src="/img/placeholder/40-40.png" alt="Профил"> -->
+                        <i class="fas fa-user-circle"></i>
+                        <span>Администратор</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Табло -->
+                <section id="dashboard" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Активни турнири</h3>
+                                <p id="active-tournaments">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-secondary">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Регистрирани отбори</h3>
+                                <p id="registered-teams">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Нови регистрации</h3>
+                                <p id="new-registrations">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Нови съобщения</h3>
+                                <p id="new-messages">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h2>Последна активност</h2>
+                        <div class="activity-list" id="activity-list">
+                            <!-- Данните ще се зареждат динамично -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Турнири -->
+                <section id="tournaments" class="content-section">
+                    <div class="section-header">
+                        <h2>Управление на турнири</h2>
+                        <button class="btn btn-primary" id="add-tournament">
+                            <i class="fas fa-plus"></i> Добави турнир
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Име</th>
+                                    <th>Дата</th>
+                                    <th>Статус</th>
+                                    <th>Отбори</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tournaments-table">
+                                <!-- Данните ще се зареждат динамично -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Отбори -->
+                <section id="teams" class="content-section">
+                    <div class="section-header">
+                        <h2>Управление на отбори</h2>
+                        <div class="team-filters">
+                            <select id="team-filter">
+                                <option value="all">Всички отбори</option>
+                                <option value="approved">Одобрени</option>
+                                <option value="pending">Чакащи</option>
+                                <option value="rejected">Отхвърлени</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Име</th>
+                                    <th>Капитан</th>
+                                    <th>Играчи</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teams-table">
+                                <!-- Данните ще се зареждат динамично -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Регистрации -->
+                <section id="registrations" class="content-section">
+                    <div class="section-header">
+                        <h2>Управление на регистрации</h2>
+                        <div class="registration-filters">
+                            <select id="registration-filter">
+                                <option value="all">Всички регистрации</option>
+                                <option value="pending">Чакащи</option>
+                                <option value="approved">Одобрени</option>
+                                <option value="rejected">Отхвърлени</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="registrations-grid">
+                        <div class="pending-registrations">
+                            <h3>Чакащи одобрение <span class="badge" id="pending-count">0</span></h3>
+                            <div class="registration-list" id="pending-registrations">
+                                <!-- Данните ще се зареждат динамично -->
+                            </div>
+                        </div>
+                        <div class="approved-registrations">
+                            <h3>Одобрени регистрации <span class="badge" id="approved-count">0</span></h3>
+                            <div class="registration-list" id="approved-registrations">
+                                <!-- Данните ще се зареждат динамично -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Новини -->
+                <section id="news" class="content-section">
+                    <div class="section-header">
+                        <h2>Управление на новини</h2>
+                        <button class="btn btn-primary" id="add-news">
+                            <i class="fas fa-plus"></i> Добави новина
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Заглавие</th>
+                                    <th>Дата</th>
+                                    <th>Автор</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="news-table">
+                                <!-- Данните ще се зареждат динамично -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Настройки -->
+                <section id="settings" class="content-section">
+                    <h2>Настройки на системата</h2>
+                    <div class="settings-tabs">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="general">Общи</button>
+                            <button class="tab-btn" data-tab="email">Имейл настройки</button>
+                            <button class="tab-btn" data-tab="security">Сигурност</button>
+                            <button class="tab-btn" data-tab="users">Потребители</button>
+                        </div>
+
+                        <div class="tab-content active" id="general">
+                            <form id="general-settings">
+                                <div class="form-group">
+                                    <label for="site-title">Име на сайта</label>
+                                    <input type="text" id="site-title" name="site-title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="admin-email">Администраторски имейл</label>
+                                    <input type="email" id="admin-email" name="admin-email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="timezone">Часова зона</label>
+                                    <select id="timezone" name="timezone" required>
+                                        <option value="Europe/Sofia">(GMT+2) София</option>
+                                        <option value="UTC">UTC</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Запази настройките</button>
+                            </form>
+                        </div>
+
+                        <div class="tab-content" id="email">
+                            <form id="email-settings">
+                                <div class="form-group">
+                                    <label for="smtp-host">SMTP Хост</label>
+                                    <input type="text" id="smtp-host" name="smtp-host">
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtp-port">SMTP Порт</label>
+                                    <input type="number" id="smtp-port" name="smtp-port">
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtp-user">SMTP Потребител</label>
+                                    <input type="text" id="smtp-user" name="smtp-user">
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtp-pass">SMTP Парола</label>
+                                    <input type="password" id="smtp-pass" name="smtp-pass">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Запази настройките</button>
+                            </form>
+                        </div>
+
+                        <div class="tab-content" id="security">
+                            <form id="security-settings">
+                                <div class="form-group">
+                                    <label for="session-timeout">Изтичане на сесия (минути)</label>
+                                    <input type="number" id="session-timeout" name="session-timeout" value="60">
+                                </div>
+                                <div class="form-group">
+                                    <label for="two-factor">Двуфакторна автентикация</label>
+                                    <select id="two-factor" name="two-factor">
+                                        <option value="disabled">Изключена</option>
+                                        <option value="email">Имейл</option>
+                                        <option value="app">Приложение</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Запази настройките</button>
+                            </form>
+                        </div>
+
+                        <div class="tab-content" id="users">
+                            <div class="section-header">
+                                <h3>Управление на потребители</h3>
+                                <button class="btn btn-primary" id="add-user">
+                                    <i class="fas fa-plus"></i> Добави потребител
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Потребител</th>
+                                            <th>Роля</th>
+                                            <th>Статус</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="users-table">
+                                        <!-- Данните ще се зареждат динамично -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Модал за турнири -->
+    <div class="modal" id="tournament-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Добавяне на нов турнир</h3>
+                <button class="close-modal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="tournament-form">
+                    <input type="hidden" id="tournament-id">
+                    <div class="form-group">
+                        <label for="tournament-name">Име на турнира *</label>
+                        <input type="text" id="tournament-name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tournament-date">Дата *</label>
+                            <input type="datetime-local" id="tournament-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tournament-location">Местоположение *</label>
+                            <input type="text" id="tournament-location" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tournament-game">Игра *</label>
+                        <select id="tournament-game" required>
+                            <option value="CS 1.6">Counter-Strike 1.6</option>
+                            <option value="CS:GO">Counter-Strike: Global Offensive</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tournament-teams">Брой отбори</label>
+                            <input type="number" id="tournament-teams" min="2" max="32" value="8">
+                        </div>
+                        <div class="form-group">
+                            <label for="tournament-prize">Награден фонд (лв.)</label>
+                            <input type="number" id="tournament-prize" min="0" value="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tournament-desc">Описание</label>
+                        <textarea id="tournament-desc" rows="4"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal">Отказ</button>
+                        <button type="submit" class="btn btn-primary">Запази</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модал за отбори -->
+    <div class="modal" id="team-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="team-modal-title">Добавяне на отбор</h3>
+                <button class="close-modal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="team-form">
+                    <input type="hidden" id="team-id">
+                    <div class="form-group">
+                        <label for="team-name">Име на отбора *</label>
+                        <input type="text" id="team-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="team-captain">Капитан *</label>
+                        <input type="text" id="team-captain" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="team-players">Играчи (разделени със запетая)</label>
+                        <textarea id="team-players" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="team-status">Статус</label>
+                        <select id="team-status">
+                            <option value="pending">Чакащ</option>
+                            <option value="approved">Одобрен</option>
+                            <option value="rejected">Отхвърлен</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal">Отказ</button>
+                        <button type="submit" class="btn btn-primary">Запази</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модал за новини -->
+    <div class="modal" id="news-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="news-modal-title">Добавяне на новина</h3>
+                <button class="close-modal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="news-form">
+                    <input type="hidden" id="news-id">
+                    <div class="form-group">
+                        <label for="news-title">Заглавие *</label>
+                        <input type="text" id="news-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="news-date">Дата *</label>
+                        <input type="date" id="news-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="news-content">Съдържание *</label>
+                        <textarea id="news-content" rows="6" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="news-image">Изображение (URL)</label>
+                        <input type="url" id="news-image">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal">Отказ</button>
+                        <button type="submit" class="btn btn-primary">Запази</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модал за потребители -->
+    <div class="modal" id="user-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="user-modal-title">Добавяне на потребител</h3>
+                <button class="close-modal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="user-form">
+                    <input type="hidden" id="user-id">
+                    <div class="form-group">
+                        <label for="user-username">Потребителско име *</label>
+                        <input type="text" id="user-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-password">Парола *</label>
+                        <input type="password" id="user-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-role">Роля *</label>
+                        <select id="user-role" required>
+                            <option value="admin">Администратор</option>
+                            <option value="editor">Редактор</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal">Отказ</button>
+                        <button type="submit" class="btn btn-primary">Запази</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>
