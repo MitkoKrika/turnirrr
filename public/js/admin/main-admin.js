@@ -8,6 +8,7 @@ import { initModals } from './modals.js';
 import { setupListFilters } from './filters.js';
 import { initSettingsSection } from './settings.js';
 import { initNewsAdmin } from './news.js';
+import { initNewsAdmin } from './news.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     checkAdminAuth();               // Проверка на токена и евентуално показване на dashboard
