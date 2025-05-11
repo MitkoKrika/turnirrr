@@ -1,40 +1,24 @@
-let mockNews = [
-    {
-        id: 1,
-        title: 'Обявен е първият турнир за тиктокъри',
-        date: '2025-04-20',
-        content: 'Участие на известни тиктокъри в CS 1.6',
-        image: '/api/placeholder/400/250',
-        author: 'admin'
-    }
-];
-
 export async function getAllNews() {
-    return new Promise(resolve => {
-        setTimeout(() => resolve(mockNews), 200);
-    });
+    const res = await fetch('/api/news');
+    if (!res.ok) throw new Error('Неуспешно зареждане на новини');
+    return await res.json();
 }
 
 export async function createNews(news) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            if (news.id) {
-                const index = mockNews.findIndex(n => n.id == news.id);
-                if (index !== -1) mockNews[index] = { ...mockNews[index], ...news };
-            } else {
-                news.id = mockNews.length + 1;
-                mockNews.push(news);
-            }
-            resolve();
-        }, 200);
+    const method = news.id ? 'PUT' : 'POST';
+    const url = news.id ? `/api/news/${news.id}` : '/api/news';
+
+    const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(news)
     });
+
+    if (!res.ok) throw new Error('Грешка при запис на новина');
+    return await res.json();
 }
 
 export async function deleteNews(id) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            mockNews = mockNews.filter(n => n.id != id);
-            resolve();
-        }, 200);
-    });
+    const res = await fetch(`/api/news/${id}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error('Грешка при изтриване на новина');
 }
