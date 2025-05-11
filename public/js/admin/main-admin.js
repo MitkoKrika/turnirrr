@@ -7,6 +7,7 @@ import { initRegistrationAdmin } from './registrations.js';
 import { initModals } from './modals.js';
 import { setupListFilters } from './filters.js';
 import { initSettingsSection } from './settings.js';
+import { initNewsAdmin } from './news.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     checkAdminAuth();               // Проверка на токена и евентуално показване на dashboard
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initModals();                   // Управление на модалните прозорци
     setupListFilters();             // Активиране на търсене/филтриране в списъци
     initSettingsSection();          // Инициализация на формата с настройки
+    initNewsAdmin();               // Инициализация на секцията с новини
     // Инициализация на секции
     initTournamentAdmin();
     initTeamAdmin();
