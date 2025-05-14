@@ -62,6 +62,16 @@ router.get('/latest', async (req, res) => {
     }
 });
 
+// Latest news route for index page
+router.get('/api/news/latest', async (req, res) => {
+    try {
+        const news = await News.find().sort({ createdAt: -1 }).limit(3);
+        res.json(news);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 // Get all news (admin)
 router.get('/admin', async (req, res) => {
     try {
