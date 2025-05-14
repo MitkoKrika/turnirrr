@@ -69,7 +69,7 @@ section {
 /* ===== ХЕДЪР И НАВИГАЦИЯ ===== */
 header {
     background-color: rgba(10, 10, 10, 0.95);
-    padding: 15px 50px;
+    padding: 8px 40px;
     position: fixed;
     width: 100%;
     top: 0;

@@ -1,12 +1,12 @@
 export async function getAllNews() {
-    const res = await fetch('/api/news');
+    const res = await fetch('/api/news/admin');
     if (!res.ok) throw new Error('Неуспешно зареждане на новини');
     return await res.json();
 }
 
 export async function createNews(news) {
     const method = news.id ? 'PUT' : 'POST';
-    const url = news.id ? `/api/news/${news.id}` : '/api/news';
+    const url = news.id ? `/api/news/admin/${news.id}` : '/api/news/admin';
 
     const res = await fetch(url, {
         method,
@@ -19,6 +19,6 @@ export async function createNews(news) {
 }
 
 export async function deleteNews(id) {
-    const res = await fetch(`/api/news/${id}`, { method: 'DELETE' });
+    const res = await fetch(`/api/news/admin/${id}`, { method: 'DELETE' });
     if (!res.ok) throw new Error('Грешка при изтриване на новина');
 }

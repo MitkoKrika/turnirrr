@@ -1,7 +1,70 @@
-/* Импортиране на основните стилове */
-@import url('style.css');
-
 /* Основни стилове за администраторския панел */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Saira+Condensed:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #e63946;
+    --secondary-color: #1be8d4;
+    --dark-color: #121212;
+    --darker-color: #0a0a0a;
+    --light-color: #f5f5f5;
+    --gray-color: #333333;
+    --light-gray: #666666;
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --glow: 0 0 15px rgba(27, 232, 212, 0.6);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Saira Condensed', sans-serif;
+    line-height: 1.6;
+    color: var(--light-color);
+    background: var(--dark-color);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+a {
+    text-decoration: none;
+    color: var(--light-color);
+    transition: var(--transition);
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 80px 0;
+}
+
 .admin-container {
     display: flex;
     min-height: 100vh;
@@ -92,9 +155,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 0px 40px;
     background-color: rgba(18, 18, 18, 0.8);
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 20px;
     box-shadow: var(--shadow);
 }
@@ -156,7 +219,7 @@
 .content-section {
     display: none;
     background-color: rgba(18, 18, 18, 0.8);
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: var(--shadow);
 }

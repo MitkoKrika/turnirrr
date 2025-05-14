@@ -89,3 +89,21 @@ export const API = {
         });
     }
 };
+
+export async function loadLatestNews() {
+    const res = await fetch('/api/news/latest');
+    if (!res.ok) throw new Error('Грешка при зареждане на новини');
+
+    const news = await res.json();
+    const container = document.getElementById('news-section');
+
+    if (!container) return;
+
+    container.innerHTML = news.map(item => `
+        <article class="news-item">
+            <h3>${item.title}</h3>
+            <p class="news-date">${new Date(item.date).toLocaleDateString()}</p>
+            <p>${item.content}</p>
+        </article>
+    `).join('');
+}
