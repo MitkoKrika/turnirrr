@@ -1,8 +1,4 @@
-import {
-    getAllNews,
-    createNews,
-    deleteNews
-} from './services/newsService.js';
+import { getAllNews, createNews, deleteNews } from './services/newsService.js';
 
 export function initNewsAdmin() {
     loadNews();
@@ -28,39 +24,72 @@ export function initNewsAdmin() {
         const content = document.getElementById('news-content').value;
         const image = document.getElementById('news-image').value;
 
-        await createNews({ id, title, date, content, image });
-        modal.classList.remove('active');
-        loadNews();
+        try {
+            await createNews({ id, title, date, content, image });
+            modal.classList.remove('active');
+            loadNews();
+        } catch (err) {
+            alert('Грешка при запазване на новината.');
+            console.error(err);
+        }
     });
 
     const table = document.getElementById('news-table');
     if (table) {
         table.addEventListener('click', async (e) => {
+            const id = e.target.dataset.id;
+            if (!id) return;
+
             if (e.target.classList.contains('delete-news')) {
-                const id = e.target.dataset.id;
                 if (confirm('Сигурен ли си, че искаш да изтриеш тази новина?')) {
-                    await deleteNews(id);
-                    loadNews();
+                    try {
+                        await deleteNews(id);
+                        loadNews();
+                    } catch (err) {
+                        alert('Грешка при изтриване на новината.');
+                    }
+                }
+            }
+
+            if (e.target.classList.contains('edit-news')) {
+                const newsItem = latestNews.find(n => n._id === id);
+                if (newsItem) {
+                    document.getElementById('news-id').value = newsItem._id;
+                    document.getElementById('news-title').value = newsItem.title;
+                    document.getElementById('news-date').value = newsItem.date.split('T')[0];
+                    document.getElementById('news-content').value = newsItem.content;
+                    document.getElementById('news-image').value = newsItem.image || '';
+
+                    modal.classList.add('active');
                 }
             }
         });
     }
 }
 
+let latestNews = [];
+
 async function loadNews() {
     const table = document.getElementById('news-table');
     if (!table) return;
 
-    const news = await getAllNews();
-    table.innerHTML = news.map(item => `
-        <tr>
-            <td>${item.id}</td>
-            <td>${item.title}</td>
-            <td>${new Date(item.date).toLocaleDateString()}</td>
-            <td>${item.author || 'admin'}</td>
-            <td>
-                <button class="delete-news btn" data-id="${item.id}">Изтрий</button>
-            </td>
-        </tr>
-    `).join('');
+    try {
+        const news = await getAllNews();
+        latestNews = news;
+
+        table.innerHTML = news.map(item => `
+            <tr>
+                <td>${item._id}</td>
+                <td>${item.title}</td>
+                <td>${new Date(item.date).toLocaleDateString()}</td>
+                <td>${item.author || 'admin'}</td>
+                <td>
+                    <button class="edit-news btn" data-id="${item._id}">Редактирай</button>
+                    <button class="delete-news btn" data-id="${item._id}">Изтрий</button>
+                </td>
+            </tr>
+        `).join('');
+    } catch (err) {
+        console.error('Грешка при зареждане на новини:', err);
+    }
 }
