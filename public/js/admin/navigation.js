@@ -1,21 +1,26 @@
 export function setupAdminNavigation() {
     const navLinks = document.querySelectorAll('.admin-nav a');
-    const sections = document.querySelectorAll('.admin-section');
+    const sections = document.querySelectorAll('.content-section');
 
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
 
-            const target = link.getAttribute('data-target');
+            let target = link.getAttribute('data-target');
+            if (!target) {
+                const href = link.getAttribute('href');
+                target = href?.startsWith('#') ? href.substring(1) : null;
+            }
+
             if (!target) return;
 
             sections.forEach(section => {
-                section.style.display = 'none';
+                section.classList.remove('active');
             });
 
             const targetSection = document.getElementById(target);
             if (targetSection) {
-                targetSection.style.display = 'block';
+                targetSection.classList.add('active');
             }
 
             navLinks.forEach(l => l.classList.remove('active'));
