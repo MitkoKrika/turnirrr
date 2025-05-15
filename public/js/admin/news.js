@@ -20,12 +20,11 @@ export function initNewsAdmin() {
 
         const id = document.getElementById('news-id').value;
         const title = document.getElementById('news-title').value;
-        const date = document.getElementById('news-date').value;
         const content = document.getElementById('news-content').value;
         const image = document.getElementById('news-image').value;
 
         try {
-            await createNews({ id, title, date, content, image });
+            await createNews({ id, title, content, image });
             modal.classList.remove('active');
             loadNews();
         } catch (err) {
@@ -47,6 +46,7 @@ export function initNewsAdmin() {
                         loadNews();
                     } catch (err) {
                         alert('Грешка при изтриване на новина.');
+                        console.error(err);
                     }
                 }
             }
@@ -56,10 +56,8 @@ export function initNewsAdmin() {
                 if (newsItem) {
                     document.getElementById('news-id').value = newsItem._id;
                     document.getElementById('news-title').value = newsItem.title;
-                    document.getElementById('news-date').value = newsItem.date.split('T')[0];
                     document.getElementById('news-content').value = newsItem.content;
-                    document.getElementById('news-image').value = newsItem.image || '';
-
+                    document.getElementById('news-image').value = newsItem.imageurl || '';
                     modal.classList.add('active');
                 }
             }
@@ -75,12 +73,7 @@ async function loadNews() {
 
     try {
         const news = await getAllNews();
-        // console.log('Резултат от API:', news);
-
-        if (!Array.isArray(news)) {
-            throw new Error('API не върна масив от новини');
-        }
-
+        if (!Array.isArray(news)) throw new Error('API не върна масив от новини');
         latestNews = news;
 
         table.innerHTML = news.map(item => `

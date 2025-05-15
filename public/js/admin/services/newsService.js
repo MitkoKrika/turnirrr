@@ -1,26 +1,18 @@
 export async function getAllNews() {
     const res = await fetch('/api/news/admin');
     if (!res.ok) throw new Error('Неуспешно зареждане на новини');
-
     const response = await res.json();
-    const newsArray = response.data;
-
-    if (!Array.isArray(newsArray)) {
-        throw new Error('API не върна масив от новини');
-    }
-
-    return newsArray;
+    return response.data;
 }
 
 export async function createNews(news) {
     const method = news.id ? 'PUT' : 'POST';
-    const url = news.id ? `/api/news/${news.id}` : '/api/news'; // ✅ БЕЗ /admin
+    const url = news.id ? `/api/news/${news.id}` : '/api/news';
 
     const payload = {
         title: news.title,
         content: news.content,
         imageurl: news.image || '',
-        date: news.date || new Date().toISOString()
     };
 
     const res = await fetch(url, {
@@ -44,7 +36,7 @@ export async function createNews(news) {
 }
 
 export async function deleteNews(id) {
-    const res = await fetch(`/api/news/admin/${id}`, {
+    const res = await fetch(`/api/news/${id}`, {
         method: 'DELETE',
         headers: {
             ...(localStorage.getItem('token') && {
@@ -53,5 +45,9 @@ export async function deleteNews(id) {
         }
     });
 
-    if (!res.ok) throw new Error('Грешка при изтриване на новина');
+    if (!res.ok) {
+        const text = await res.text();
+        console.error('Грешка при изтриване:', text);
+        throw new Error('Грешка при изтриване на новина');
+    }
 }
