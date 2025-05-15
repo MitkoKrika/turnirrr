@@ -87,7 +87,7 @@ async function loadNews() {
             <tr>
                 <td>${item._id}</td>
                 <td>${item.title}</td>
-                <td>${new Date(item.date).toLocaleDateString()}</td>
+                <td>${new Date(item.createdAt).toLocaleDateString('bg-BG')}</td>
                 <td>${item.author || 'admin'}</td>
                 <td>
                     <button class="edit-news btn" data-id="${item._id}">Редактирай</button>
