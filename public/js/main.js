@@ -6,10 +6,9 @@ import { initContactForm } from './forms/contactForm.js';
 import { setupScrollAnimations, setupFaqToggles, setupCollapsibles } from './animations.js';
 import { loadTournamentDetails } from './tournament.js';
 import { loadTeams } from './teams.js';
-import { API, loadLatestNews } from './api/index.js';
+import { loadLatestNews } from './api/index.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    API();
     setupMobileNav();
     setupCountdown();
     initNewsletterForm();

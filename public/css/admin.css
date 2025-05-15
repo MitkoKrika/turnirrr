@@ -581,6 +581,11 @@ section {
     z-index: 1000;
 }
 
+.modal.active {
+    display: block;
+    /* или flex, в зависимост от дизайна */
+}
+
 .modal-content {
     background-color: var(--darker-color);
     width: 90%;

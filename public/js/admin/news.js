@@ -1,6 +1,7 @@
 import { getAllNews, createNews, deleteNews } from './services/newsService.js';
 
 export function initNewsAdmin() {
+    console.log('Резултат от API:', news);
     loadNews();
 
     const form = document.getElementById('news-form');

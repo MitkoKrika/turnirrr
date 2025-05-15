@@ -194,10 +194,10 @@
   <h2>Новини</h2>
 
   <!-- Бутон за отваряне на модала -->
-  <button id="add-news" class="btn">Добави новина</button>
+  <button id="add-news" class="btn btn-primary"><i class="fas fa-plus"></i>Добави новина</button>
 
   <!-- Таблица с новините -->
-  <table>
+  <table id="news-table" class="data-table">
     <thead>
       <tr>
         <th>ID</th>
@@ -215,7 +215,7 @@
   <!-- Модален прозорец за създаване/редактиране -->
   <div id="news-modal" class="modal">
     <div class="modal-content">
-      <span class="close-btn">&times;</span>
+      <button class="close-modal">×</button>
       <h3>Добавяне / Редактиране на новина</h3>
 
       <form id="news-form">
