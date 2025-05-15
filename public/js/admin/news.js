@@ -1,7 +1,6 @@
 import { getAllNews, createNews, deleteNews } from './services/newsService.js';
 
 export function initNewsAdmin() {
-    console.log('Резултат от API:', news);
     loadNews();
 
     const form = document.getElementById('news-form');
@@ -47,7 +46,7 @@ export function initNewsAdmin() {
                         await deleteNews(id);
                         loadNews();
                     } catch (err) {
-                        alert('Грешка при изтриване на новината.');
+                        alert('Грешка при изтриване на новина.');
                     }
                 }
             }
@@ -76,6 +75,12 @@ async function loadNews() {
 
     try {
         const news = await getAllNews();
+        // console.log('Резултат от API:', news);
+
+        if (!Array.isArray(news)) {
+            throw new Error('API не върна масив от новини');
+        }
+
         latestNews = news;
 
         table.innerHTML = news.map(item => `

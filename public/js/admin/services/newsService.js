@@ -1,24 +1,57 @@
 export async function getAllNews() {
     const res = await fetch('/api/news/admin');
     if (!res.ok) throw new Error('Неуспешно зареждане на новини');
-    return await res.json();
+
+    const response = await res.json();
+    const newsArray = response.data;
+
+    if (!Array.isArray(newsArray)) {
+        throw new Error('API не върна масив от новини');
+    }
+
+    return newsArray;
 }
 
 export async function createNews(news) {
     const method = news.id ? 'PUT' : 'POST';
-    const url = news.id ? `/api/news/admin/${news.id}` : '/api/news/admin';
+    const url = news.id ? `/api/news/${news.id}` : '/api/news'; // ✅ БЕЗ /admin
+
+    const payload = {
+        title: news.title,
+        content: news.content,
+        imageurl: news.image || '',
+        date: news.date || new Date().toISOString()
+    };
 
     const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(news)
+        headers: {
+            'Content-Type': 'application/json',
+            ...(localStorage.getItem('token') && {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            })
+        },
+        body: JSON.stringify(payload)
     });
 
-    if (!res.ok) throw new Error('Грешка при запис на новина');
+    if (!res.ok) {
+        const text = await res.text();
+        console.error('Грешка от сървъра:', text);
+        throw new Error('Грешка при запис на новина');
+    }
+
     return await res.json();
 }
 
 export async function deleteNews(id) {
-    const res = await fetch(`/api/news/admin/${id}`, { method: 'DELETE' });
+    const res = await fetch(`/api/news/admin/${id}`, {
+        method: 'DELETE',
+        headers: {
+            ...(localStorage.getItem('token') && {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            })
+        }
+    });
+
     if (!res.ok) throw new Error('Грешка при изтриване на новина');
 }
