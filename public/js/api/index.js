@@ -115,30 +115,40 @@ export async function loadLatestNews() {
     `).join('');
 }
 
-export async function loadNews() {
-    console.log('Loading news...');
-    const container = document.getElementById('news-section');
-    console.log('Loading news...');
-    const res = await fetch('/api/news/:id');
-    console.log('The news...');
-    if (!res.ok) throw new Error('Грешка при зареждане на новини');
+export async function loadNewsById() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const newsId = urlParams.get('id');
 
-    const response = await res.json();
-    const news = response.data;
+    const titleEl = document.getElementById('news-data-title');
+    const contentEl = document.getElementById('news-data-content');
+    const dateEl = document.getElementById('news-date-createdAt');
+    const imageContainer = document.querySelector('.news-data-imageurl');
+    const errorMessage = document.getElementById('error-message');
+    const loadingSpinner = document.getElementById('loading-spinner');
 
-    if (!container || !Array.isArray(news)) return;
+    if (!newsId) {
+        errorMessage.textContent = 'Липсва ID на новината.';
+        errorMessage.style.display = 'block';
+        return;
+    }
 
-    container.innerHTML = news.map(item => `
-        <article class="news-item">
-            <div class="news-img">
-                <img src="${item.imageurl}" alt="${item.title}">
-            </div>
-            <div class="news-content">
-                <span class="date">${new Date(item.createdAt).toLocaleDateString('bg-BG')}</span>
-                <h3>${item.title}</h3>
-                <p>${item.content.substring(0, 100)}...</p>
-                <a href="#" class="read-more">Прочети повече</a>
-            </div>
-        </article>
-    `).join('');
+    loadingSpinner.style.display = 'flex';
+
+    try {
+        const res = await fetch(`/api/news/${newsId}`);
+        if (!res.ok) throw new Error('Новината не е намерена.');
+
+        const news = await res.json();
+
+        titleEl.textContent = news.title || 'Без заглавие';
+        contentEl.textContent = news.content || 'Няма съдържание.';
+        dateEl.textContent = `Дата: ${new Date(news.createdAt).toLocaleDateString('bg-BG')}`;
+        imageContainer.innerHTML = `<img src="${news.imageurl || '/api/placeholder/800/400'}" alt="${news.title}">`;
+
+    } catch (err) {
+        errorMessage.textContent = 'Грешка при зареждането на новината: ' + err.message;
+        errorMessage.style.display = 'block';
+    } finally {
+        loadingSpinner.style.display = 'none';
+    }
 }

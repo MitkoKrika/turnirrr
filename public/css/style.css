@@ -474,6 +474,26 @@ header {
     position: relative;
 }
 
+.news-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+.image-wrapper img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+.loading-spinner {
+  text-align: center;
+  margin-top: 30px;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
 .news h2 {
     text-align: center;
     margin-bottom: 50px;

@@ -26,41 +26,30 @@
         </div>
     </header>
 
-    <section class="page-banner">
-        <div class="banner-content">
-            <h1 id="news-title">Зареждане на новина...</h1>
-            <p id="news-date">Дата: Зареждане...</p>
-        </div>
-    </section>
+    <!-- 🔵 Основна секция за визуализация на новината -->
+  <main class="news-container">
 
-    <section class="news">
-        <div class="container">
-            <div class="news-item">
-                <div class="news-data-imageurl">
-                </div>
-                <div class="news-content">
-                    <span class="date" id="news-date-createdAt"></span>
-                    <h3 id="news-data-title"></h3>
-                    <p id="news-data-content"></p>
-                    <a href="#" class="read-more" onclick="window.history.back()">Обратно към новините</a>
-                </div>
-            </div>
-            <div class="loading" id="loading-spinner" style="display: none;">
-                <div class="loading-spinner"></div>
-            </div>
-            <div class="error-message" id="error-message" style="display: none;">
-                Грешка при зареждането на новината. Моля, опитайте отново по-късно.
-            </div>
-        </div>
-    </section>
-    <section id="news" class="news">
-        <div class="container">
-            <h2>Последни новини</h2>
-            <div class="news-grid" id="news-data-id">
-                <!-- Новините ще се вмъкнат тук -->
-            </div>
-        </div>
-    </section>
+    <!-- Заглавие -->
+    <h2 id="news-data-title" class="news-title"></h2>
+
+    <!-- Дата -->
+    <span id="news-date-createdAt" class="news-date"></span>
+
+    <!-- Изображение -->
+    <div class="news-data-imageurl image-wrapper"></div>
+
+    <!-- Съдържание -->
+    <div class="news-content">
+      <p id="news-data-content"></p>
+    </div>
+
+  </main>
+
+  <!-- 🔴 Грешки и зареждане -->
+  <div id="error-message" class="error-message" style="display: none;"></div>
+  <div id="loading-spinner" class="loading-spinner" style="display: none;">
+    <p>Зареждане...</p>
+  </div>
 
     <footer>
         <div class="container">
@@ -100,7 +89,7 @@
         </div>
     </footer>
 
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', () => {
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
@@ -155,7 +144,7 @@
 
             fetchNews();
         });
-    </script>
+    </script> -->
     <script type="module" src="/js/main.js"></script>
 </body>
 </html>
