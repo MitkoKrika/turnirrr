@@ -26,30 +26,50 @@
         </div>
     </header>
 
-    <!-- 🔵 Основна секция за визуализация на новината -->
-  <main class="news-container">
+    <section class="page-banner">
+        <div class="banner-content">
+            <h1 id="news-data-title" class="news-title"></h1>
+            <span id="news-date-createdAt" class="news-date"></span>
+        </div>
+    </section>
 
-    <!-- Заглавие -->
-    <h2 id="news-data-title" class="news-title"></h2>
+    <section class="news-container">
+        <div class="container">
+            <div class="news-item">
+                <div class="news-data-imageurl image-wrapper"></div>
+                <div class="news-content">
+                    <h1 id="news-data-title" class="news-title"></h1>
+                    <div class="news-content">
+                        <p id="news-data-content"></p>
+                    </div>
+                    <a href="#" class="read-more" onclick="window.history.back()">Обратно към новините</a>
+                </div>
+            </div>
+            <div class="loading" id="loading-spinner" style="display: none;">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+    </section>
+    <!-- 📃 Всички новини -->
+<section id="news-list-section" style="display: none;">
+  <h2>Всички новини</h2>
+  <div id="all-news-container"></div>
+</section>
 
-    <!-- Дата -->
-    <span id="news-date-createdAt" class="news-date"></span>
-
-    <!-- Изображение -->
-    <div class="news-data-imageurl image-wrapper"></div>
-
-    <!-- Съдържание -->
-    <div class="news-content">
-      <p id="news-data-content"></p>
-    </div>
-
-  </main>
-
-  <!-- 🔴 Грешки и зареждане -->
-  <div id="error-message" class="error-message" style="display: none;"></div>
-  <div id="loading-spinner" class="loading-spinner" style="display: none;">
-    <p>Зареждане...</p>
+<!-- 📰 Една конкретна новина -->
+<section id="single-news-section" style="display: none;">
+  <h2 id="news-data-title"></h2>
+  <span id="news-date-createdAt" class="news-date"></span>
+  <div class="news-data-imageurl"></div>
+  <div class="news-content">
+    <p id="news-data-content"></p>
   </div>
+  <a href="#" class="read-more" onclick="window.history.back()">⬅ Обратно към новините</a>
+</section>
+
+<!-- ⚠️ Грешки и зареждане -->
+<div id="error-message" class="error-message" style="display: none;"></div>
+<div id="loading-spinner" class="loading-spinner" style="display: none;">Зареждане...</div>
 
     <footer>
         <div class="container">
@@ -89,62 +109,24 @@
         </div>
     </footer>
 
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            const loadingSpinner = document.getElementById('loading-spinner');
-            const errorMessage = document.getElementById('error-message');
-            const newsTitle = document.getElementById('news-title');
-            const newsDate = document.getElementById('news-date');
-            const newsDateBadge = document.getElementById('news-date-badge');
-            const newsImage = document.getElementById('news-image');
-            const newsContentTitle = document.getElementById('news-content-title');
-            const newsContent = document.getElementById('news-content');
-
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
-
-            // Get news ID from URL query parameter (e.g., news.html?id=123)
-            const urlParams = new URLSearchParams(window.location.search);
-            const newsId = urlParams.get('id');
-
-            if (!newsId) {
-                errorMessage.textContent = 'Липсва ID на новината.';
-                errorMessage.style.display = 'block';
-                return;
-            }
-
-            // Fetch news from API
-            const fetchNews = async () => {
-                loadingSpinner.style.display = 'flex';
-                try {
-                    const response = await fetch(`api/news/${newsId}`);
-                    if (!response.ok) {
-                        throw new Error('Неуспешно зареждане на новината');
-                    }
-                    const data = await response.json();
-
-                    // Update page content
-                    newsTitle.textContent = data.title || 'Без заглавие';
-                    newsDate.textContent = `Дата: ${new Date(data.date).toLocaleDateString('bg-BG')}`;
-                    newsDateBadge.textContent = new Date(data.date).toLocaleDateString('bg-BG');
-                    newsImage.src = data.imageUrl || 'https://via.placeholder.com/1200x400';
-                    newsContentTitle.textContent = data.title || 'Без заглавие';
-                    newsContent.textContent = data.content || 'Няма съдържание.';
-                } catch (error) {
-                    errorMessage.textContent = 'Грешка при зареждането на новината: ' + error.message;
-                    errorMessage.style.display = 'block';
-                } finally {
-                    loadingSpinner.style.display = 'none';
-                }
-            };
-
-            fetchNews();
-        });
-    </script> -->
     <script type="module" src="/js/main.js"></script>
 </body>
 </html>
+<!-- 🔵 Основна секция за визуализация на новината -->
+  <main class="news-container">
+
+    <!-- Заглавие -->
+    <h2 id="news-data-title" class="news-title"></h2>
+
+    <!-- Дата -->
+    <span id="news-date-createdAt" class="news-date"></span>
+
+    <!-- Изображение -->
+    <div class="news-data-imageurl image-wrapper"></div>
+
+    <!-- Съдържание -->
+    <div class="news-content">
+      <p id="news-data-content"></p>
+    </div>
+
+  </main>

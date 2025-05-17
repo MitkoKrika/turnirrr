@@ -109,7 +109,7 @@ export async function loadLatestNews() {
                 <span class="date">${new Date(item.createdAt).toLocaleDateString('bg-BG')}</span>
                 <h3>${item.title}</h3>
                 <p>${item.content.substring(0, 100)}...</p>
-                <a href="#" class="read-more">Прочети повече</a>
+                <a href="news.html?id=${item._id}" class="read-more">Прочети повече</a>
             </div>
         </article>
     `).join('');
@@ -138,7 +138,8 @@ export async function loadNewsById() {
         const res = await fetch(`/api/news/${newsId}`);
         if (!res.ok) throw new Error('Новината не е намерена.');
 
-        const news = await res.json();
+        const response = await res.json();
+        const news = response.data;
 
         titleEl.textContent = news.title || 'Без заглавие';
         contentEl.textContent = news.content || 'Няма съдържание.';
@@ -152,3 +153,4 @@ export async function loadNewsById() {
         loadingSpinner.style.display = 'none';
     }
 }
+
