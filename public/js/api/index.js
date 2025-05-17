@@ -91,19 +91,26 @@ export const API = {
 };
 
 export async function loadLatestNews() {
+    const container = document.getElementById('news-section');
     const res = await fetch('/api/news/latest');
     if (!res.ok) throw new Error('Грешка при зареждане на новини');
 
-    const news = await res.json();
-    const container = document.getElementById('news-section');
+    const response = await res.json();
+    const news = response.data;
 
-    if (!container) return;
+    if (!container || !Array.isArray(news)) return;
 
     container.innerHTML = news.map(item => `
         <article class="news-item">
-            <h3>${item.title}</h3>
-            <p class="news-date">${new Date(item.date).toLocaleDateString()}</p>
-            <p>${item.content}</p>
+            <div class="news-img">
+                <img src="${item.imageurl}" alt="${item.title}">
+            </div>
+            <div class="news-content">
+                <span class="date">${new Date(item.createdAt).toLocaleDateString('bg-BG')}</span>
+                <h3>${item.title}</h3>
+                <p>${item.content.substring(0, 100)}...</p>
+                <a href="#" class="read-more">Прочети повече</a>
+            </div>
         </article>
     `).join('');
 }
