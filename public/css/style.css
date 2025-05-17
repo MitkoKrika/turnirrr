@@ -516,12 +516,21 @@ header {
     gap: 30px;
 }
 
+.news-list-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px 0;
+}
+
 .news-item {
     background-color: rgba(18, 18, 18, 0.8);
     border-radius: 10px;
     overflow: hidden;
+    padding-bottom: 20px;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    border-bottom: 1px solid #ccc;
     border: 1px solid rgba(27, 232, 212, 0.1);
 }
 

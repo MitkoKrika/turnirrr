@@ -154,3 +154,38 @@ export async function loadNewsById() {
     }
 }
 
+export function loadNewsPage() {
+  const id = new URLSearchParams(window.location.search).get('id');
+  const single = document.getElementById('news-single-section');
+  const list = document.getElementById('news-list-section');
+  const container = document.getElementById('news-list-container');
+  const spinner = document.getElementById('loading-spinner');
+  const errorMessage = document.getElementById('error-message');
+
+  if (id) {
+    single.style.display = 'block';
+    loadNewsById();
+  } else {
+    list.style.display = 'block';
+    spinner.style.display = 'block';
+
+    fetch('/api/news/admin')
+      .then(res => res.json())
+      .then(json => {
+        const news = json.data;
+        container.innerHTML = news.map(item => `
+          <article class="news-item">
+            <h3>${item.title}</h3>
+            <span>${new Date(item.createdAt).toLocaleDateString('bg-BG')}</span>
+            <p>${item.content.substring(0, 150)}...</p>
+            <a href="news.html?id=${item._id}" class="read-more">Прочети повече</a>
+          </article>
+        `).join('');
+      })
+      .catch(() => {
+        errorMessage.textContent = 'Грешка при зареждане на новините.';
+        errorMessage.style.display = 'block';
+      })
+      .finally(() => spinner.style.display = 'none');
+  }
+}

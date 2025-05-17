@@ -1,94 +1,52 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Новина | TikTok CS 1.6 Турнир</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Новини | TikTok CS 1.6 Турнир</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <header>
-        <a href="index.html" class="logo">CS<span>Турнири</span></a>
-        <ul class="nav-links">
-            <li><a href="index.html">Начало</a></li>
-            <li><a href="#">Турнир</a></li>
-            <li><a href="#">Отбори</a></li>
-            <li><a href="#">Правила</a></li>
-            <li><a href="#">Регистрация</a></li>
-            <li><a href="#">Контакти</a></li>
-            <li><a href="user.html"><i class="fas fa-user"></i> Профил</a></li>
-        </ul>
-        <div class="hamburger">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-    </header>
 
-    <section class="page-banner">
-        <div class="banner-content">
-            <h1 id="news-data-title" class="news-title"></h1>
-            <span id="news-date-createdAt" class="news-date"></span>
-        </div>
-    </section>
+  <header>
+    <a href="index.html" class="logo">CS<span>Турнири</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Начало</a></li>
+      <li><a href="#">Турнир</a></li>
+      <li><a href="#">Отбори</a></li>
+      <li><a href="#">Правила</a></li>
+      <li><a href="#">Регистрация</a></li>
+      <li><a href="#">Контакти</a></li>
+      <li><a href="user.html"><i class="fas fa-user"></i> Профил</a></li>
+    </ul>
+  </header>
 
-    <section class="news-container">
-        <div class="container">
-            <div class="news-item">
-                <div class="news-data-imageurl image-wrapper"></div>
-                <div class="news-content">
-                    <h1 id="news-data-title" class="news-title"></h1>
-                    <div class="news-content">
-                        <p id="news-data-content"></p>
-                    </div>
-                    <a href="#" class="read-more" onclick="window.history.back()">Обратно към новините</a>
-                </div>
-            </div>
-            <div class="loading" id="loading-spinner" style="display: none;">
-                <div class="loading-spinner"></div>
-            </div>
-        </div>
-    </section>
+  <section id="news-list-section" style="display: none;">
+    <div class="container">
+      <h2>Всички новини</h2>
+      <div id="news-list-container" class="news-list-grid"></div>
+    </div>
+  </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section about">
-                    <h3>CS<span>Турнири</span></h3>
-                    <p>Организираме професионални CS 1.6 турнири и работим за развитието на гейминг общността в България.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section links">
-                    <h3>Бързи връзки</h3>
-                    <ul>
-                        <li><a href="index.html">Начало</a></li>
-                        <li><a href="#">Турнир</a></li>
-                        <li><a href="#">Отбори</a></li>
-                        <li><a href="#">Правила</a></li>
-                        <li><a href="#">Регистрация</a></li>
-                        <li><a href="#">Контакти</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section contact">
-                    <h3>Контакти</h3>
-                    <p><i class="fas fa-envelope"></i> [email protected]</p>
-                    <p><i class="fas fa-phone"></i> +359 88 123 4567</p>
-                    <p><i class="fas fa-map-marker-alt"></i> София, България</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2025 TikTok CS 1.6 Турнир – BG | Всички права запазени</p>
-            </div>
-        </div>
-    </footer>
+  <section id="news-single-section" style="display: none;">
+    <div class="container">
+      <h2 id="news-data-title" class="news-title"></h2>
+      <span id="news-date-createdAt" class="news-date"></span>
+      <div class="news-data-imageurl image-wrapper"></div>
+      <div class="news-content">
+        <p id="news-data-content"></p>
+      </div>
+      <a href="#" class="read-more" onclick="window.history.back()">⬅ Обратно към новините</a>
+    </div>
+  </section>
 
-    <script type="module" src="/js/main.js"></script>
+  <!-- ⚠️ Грешки и зареждане това за сега остава така за да разбера защо прихваща турнаментите -->
+  <!-- <div id="error-message" class="error-message" style="display: none;"></div> -->
+  <div id="loading-spinner" class="loading-spinner" style="display: none;">Зареждане...</div>
+
+  <footer>
+    <p>© 2025 TikTok CS 1.6 Турнир – Всички права запазени</p>
+  </footer>
+  <script type="module" src="/js/main.js"></script>
 </body>
 </html>
