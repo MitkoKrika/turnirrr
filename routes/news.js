@@ -50,7 +50,7 @@ router.get('/latest', async (req, res) => {
         const news = await News.find()
             .sort({ createdAt: -1 })
             .limit(limit)
-            .select('-__v'); // Exclude version key
+            .select('-__v');
             
         res.json({
             success: true,
