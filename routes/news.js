@@ -50,7 +50,7 @@ router.get('/latest', async (req, res) => {
         const news = await News.find()
             .sort({ createdAt: -1 })
             .limit(limit)
-            .select('-__v');
+            .select('-__v'); // Exclude version key
             
         res.json({
             success: true,
@@ -82,6 +82,26 @@ router.get('/admin', async (req, res) => {
         res.json({
             success: true,
             count: news.length,
+            data: news
+        });
+    } catch (error) {
+        handleError(res, error, 'Failed to fetch news');
+    }
+});
+// Get news by ID
+router.get('/:id', async (req, res) => {
+    try {
+        const news = await News.findById(req.params.id).select('-__v');
+        
+        if (!news) {
+            return res.status(404).json({ 
+                success: false,
+                message: 'News not found' 
+            });
+        }
+
+        res.json({
+            success: true,
             data: news
         });
     } catch (error) {
