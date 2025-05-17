@@ -1,4 +1,4 @@
-import { getAllNews, createNews, deleteNews } from './services/newsService.js';
+import { getAllNews, getNewsById, createNews, deleteNews } from './services/newsService.js';
 
 export function initNewsAdmin() {
     loadNews();
@@ -68,6 +68,32 @@ export function initNewsAdmin() {
 let latestNews = [];
 
 async function loadNews() {
+    const table = document.getElementById('news-table');
+    if (!table) return;
+
+    try {
+        const news = await getAllNews();
+        if (!Array.isArray(news)) throw new Error('API не върна масив от новини');
+        latestNews = news;
+
+        table.innerHTML = news.map(item => `
+            <tr>
+                <td>${item._id}</td>
+                <td>${item.title}</td>
+                <td>${new Date(item.createdAt).toLocaleDateString('bg-BG')}</td>
+                <td>${item.author || 'admin'}</td>
+                <td>
+                    <button class="edit-news btn" data-id="${item._id}">Редактирай</button>
+                    <button class="delete-news btn" data-id="${item._id}">Изтрий</button>
+                </td>
+            </tr>
+        `).join('');
+    } catch (err) {
+        console.error('Грешка при зареждане на новини:', err);
+    }
+}
+
+async function getNewsById() {
     const table = document.getElementById('news-table');
     if (!table) return;
 

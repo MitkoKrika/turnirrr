@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новина | TikTok CS 1.6 Турнир</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">CS<span>Турнири</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Начало</a></li>
+            <li><a href="#">Турнир</a></li>
+            <li><a href="#">Отбори</a></li>
+            <li><a href="#">Правила</a></li>
+            <li><a href="#">Регистрация</a></li>
+            <li><a href="#">Контакти</a></li>
+            <li><a href="user.html"><i class="fas fa-user"></i> Профил</a></li>
+        </ul>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <section class="page-banner">
+        <div class="banner-content">
+            <h1 id="news-title">Зареждане на новина...</h1>
+            <p id="news-date">Дата: Зареждане...</p>
+        </div>
+    </section>
+
+    <section class="news">
+        <div class="container">
+            <div class="news-item">
+                <div class="news-data-imageurl">
+                </div>
+                <div class="news-content">
+                    <span class="date" id="news-date-createdAt"></span>
+                    <h3 id="news-data-title"></h3>
+                    <p id="news-data-content"></p>
+                    <a href="#" class="read-more" onclick="window.history.back()">Обратно към новините</a>
+                </div>
+            </div>
+            <div class="loading" id="loading-spinner" style="display: none;">
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="error-message" id="error-message" style="display: none;">
+                Грешка при зареждането на новината. Моля, опитайте отново по-късно.
+            </div>
+        </div>
+    </section>
+    <section id="news" class="news">
+        <div class="container">
+            <h2>Последни новини</h2>
+            <div class="news-grid" id="news-data-id">
+                <!-- Новините ще се вмъкнат тук -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>CS<span>Турнири</span></h3>
+                    <p>Организираме професионални CS 1.6 турнири и работим за развитието на гейминг общността в България.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Бързи връзки</h3>
+                    <ul>
+                        <li><a href="index.html">Начало</a></li>
+                        <li><a href="#">Турнир</a></li>
+                        <li><a href="#">Отбори</a></li>
+                        <li><a href="#">Правила</a></li>
+                        <li><a href="#">Регистрация</a></li>
+                        <li><a href="#">Контакти</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact">
+                    <h3>Контакти</h3>
+                    <p><i class="fas fa-envelope"></i> [email protected]</p>
+                    <p><i class="fas fa-phone"></i> +359 88 123 4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> София, България</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 TikTok CS 1.6 Турнир – BG | Всички права запазени</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const errorMessage = document.getElementById('error-message');
+            const newsTitle = document.getElementById('news-title');
+            const newsDate = document.getElementById('news-date');
+            const newsDateBadge = document.getElementById('news-date-badge');
+            const newsImage = document.getElementById('news-image');
+            const newsContentTitle = document.getElementById('news-content-title');
+            const newsContent = document.getElementById('news-content');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Get news ID from URL query parameter (e.g., news.html?id=123)
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsId = urlParams.get('id');
+
+            if (!newsId) {
+                errorMessage.textContent = 'Липсва ID на новината.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Fetch news from API
+            const fetchNews = async () => {
+                loadingSpinner.style.display = 'flex';
+                try {
+                    const response = await fetch(`api/news/${newsId}`);
+                    if (!response.ok) {
+                        throw new Error('Неуспешно зареждане на новината');
+                    }
+                    const data = await response.json();
+
+                    // Update page content
+                    newsTitle.textContent = data.title || 'Без заглавие';
+                    newsDate.textContent = `Дата: ${new Date(data.date).toLocaleDateString('bg-BG')}`;
+                    newsDateBadge.textContent = new Date(data.date).toLocaleDateString('bg-BG');
+                    newsImage.src = data.imageUrl || 'https://via.placeholder.com/1200x400';
+                    newsContentTitle.textContent = data.title || 'Без заглавие';
+                    newsContent.textContent = data.content || 'Няма съдържание.';
+                } catch (error) {
+                    errorMessage.textContent = 'Грешка при зареждането на новината: ' + error.message;
+                    errorMessage.style.display = 'block';
+                } finally {
+                    loadingSpinner.style.display = 'none';
+                }
+            };
+
+            fetchNews();
+        });
+    </script>
+    <script type="module" src="/js/main.js"></script>
+</body>
+</html>

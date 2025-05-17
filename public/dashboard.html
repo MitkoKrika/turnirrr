@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Потребителски панел | TikTok CS 1.6 Турнир</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">CS<span>Турнири</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Начало</a></li>
+            <li><a href="#">Турнир</a></li>
+            <li><a href="#">Отбори</a></li>
+            <li><a href="#">Правила</a></li>
+            <li><a href="#">Регистрация</a></li>
+            <li><a href="#">Контакти</a></li>
+            <li><a href="#" class="active"><i class="fas fa-user"></i> Профил</a></li>
+        </ul>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <section class="tournament-details">
+        <div class="container">
+            <div class="tournament-header">
+                <div class="tournament-logo">
+                    <img id="current-avatar" src="https://via.placeholder.com/150" alt="User Avatar">
+                </div>
+                <div class="tournament-title">
+                    <h2>Потребителски панел</h2>
+                    <div class="tournament-meta">
+                        <span><i class="fas fa-user"></i> Потребител: [Username]</span>
+                        <span><i class="fas fa-envelope"></i> [email@example.com]</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tournament-info-tabs">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="overview">Преглед</button>
+                    <button class="tab-btn" data-tab="profile">Редактиране на профил</button>
+                    <button class="tab-btn" data-tab="avatar">Смяна на аватар</button>
+                    <button class="tab-btn" data-tab="password">Смяна на парола</button>
+                    <button class="tab-btn" data-tab="phone">Смяна на телефон</button>
+                    <button class="tab-btn" data-tab="social">Социални мрежи</button>
+                    <button class="tab-btn" data-tab="teams">Моите отбори</button>
+                    <button class="tab-btn" data-tab="registrations">Регистрации</button>
+                    <button class="tab-btn" style="margin-left: auto;"><i class="fas fa-sign-out-alt"></i> Изход</button>
+                </div>
+
+                <div class="tab-content active" id="overview">
+                    <h2>Преглед на профила</h2>
+                    <div class="overview-grid">
+                        <div class="overview-card">
+                            <h3>Информация за профила</h3>
+                            <p><strong>Потребителско име:</strong> [Username]</p>
+                            <p><strong>Имейл:</strong> [email@example.com]</p>
+                            <p><strong>Телефон:</strong> [+359 88 123 4567]</p>
+                            <p><strong>Discord ID:</strong> [Discord#1234]</p>
+                        </div>
+                        <div class="overview-card">
+                            <h3>Социални мрежи</h3>
+                            <p><strong>Twitter:</strong> [@Username]</p>
+                            <p><strong>Twitch:</strong> [twitch.tv/username]</p>
+                            <p><strong>YouTube:</strong> [youtube.com/@username]</p>
+                        </div>
+                        <div class="overview-card">
+                            <h3>Статистика</h3>
+                            <p><strong>Регистрирани отбори:</strong> 2</p>
+                            <p><strong>Участия в турнири:</strong> 1</p>
+                            <p><strong>Последна активност:</strong> 17.05.2025</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="profile">
+                    <h2>Редактиране на профил</h2>
+                    <div class="registration-form-container">
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="username">Потребителско име <span class="required">*</span></label>
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Имейл <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="discord">Discord ID</label>
+                                <input type="text" id="discord" name="discord">
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="cta-button secondary">Отказ</button>
+                                <button type="submit" class="cta-button primary">Запази</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="avatar">
+                    <h2>Смяна на аватар</h2>
+                    <div class="registration-form-container">
+                        <form id="avatar-form" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>Текущ аватар</label>
+                                <div class="tournament-logo" style="margin: 0 auto;">
+                                    <img id="avatar-preview" src="https://via.placeholder.com/150" alt="Avatar Preview">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="avatar-upload">Изберете нов аватар <span class="required">*</span></label>
+                                <input type="file" id="avatar-upload" name="avatar" accept="image/png,image/jpeg" required>
+                                <p style="color: #aaa; font-size: 14px;">Поддържани формати: PNG, JPEG. Максимален размер: 2MB.</p>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="cta-button secondary">Отказ</button>
+                                <button type="submit" class="cta-button primary">Запази</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="password">
+                    <h2>Смяна на парола</h2>
+                    <div class="registration-form-container">
+                        <form id="password-form">
+                            <div class="form-group">
+                                <label for="current-password">Текуща парола <span class="required">*</span></label>
+                                <input type="password" id="current-password" name="current-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Нова парола <span class="required">*</span></label>
+                                <input type="password" id="new-password" name="new-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Потвърди новата парола <span class="required">*</span></label>
+                                <input type="password" id="confirm-password" name="confirm-password" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="cta-button secondary">Отказ</button>
+                                <button type="submit" class="cta-button primary">Смени парола</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="phone">
+                    <h2>Смяна на телефонен номер</h2>
+                    <div class="registration-form-container">
+                        <form id="phone-form">
+                            <div class="form-group">
+                                <label for="current-phone">Текущ телефонен номер</label>
+                                <input type="tel" id="current-phone" name="current-phone" disabled value="+359 88 123 4567">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-phone">Нов телефонен номер <span class="required">*</span></label>
+                                <input type="tel" id="new-phone" name="new-phone" required pattern="\+359[0-9]{8}" placeholder="+359881234567">
+                            </div>
+                            <div class="form-group">
+                                <label for="verify-code">Код за потвърждение <span class="required">*</span></label>
+                                <input type="text" id="verify-code" name="verify-code" required placeholder="Въведете получения код">
+                                <button type="button" class="cta-button secondary" style="margin-top: 10px;">Изпрати код</button>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="cta-button secondary">Отказ</button>
+                                <button type="submit" class="cta-button primary">Смени телефон</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="social">
+                    <h2>Редактиране на социални мрежи</h2>
+                    <div class="registration-form-container">
+                        <form id="social-form">
+                            <div class="form-group">
+                                <label for="twitter">Twitter</label>
+                                <div class="social-input">
+                                    <i class="fab fa-twitter"></i>
+                                    <input type="text" id="twitter" name="twitter" placeholder="@username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="twitch">Twitch</label>
+                                <div class="social-input">
+                                    <i class="fab fa-twitch"></i>
+                                    <input type="text" id="twitch" name="twitch" placeholder="twitch.tv/username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="youtube">YouTube</label>
+                                <div class="social-input">
+                                    <i class="fab fa-youtube"></i>
+                                    <input type="text" id="youtube" name="youtube" placeholder="youtube.com/@username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="facebook">Facebook</label>
+                                <div class="social-input">
+                                    <i class="fab fa-facebook-f"></i>
+                                    <input type="text" id="facebook" name="facebook" placeholder="facebook.com/username">
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="cta-button secondary">Отказ</button>
+                                <button type="submit" class="cta-button primary">Запази</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="teams">
+                    <h2>Моите отбори</h2>
+                    <div class="teams-list">
+                        <div class="team">
+                            <h4>Отбор: FireStorm</h4>
+                            <ul>
+                                <li><strong>Капитан:</strong> PlayerOne</li>
+                                <li><strong>Играчи:</strong> PlayerTwo, PlayerThree, PlayerFour, PlayerFive</li>
+                                <li><strong>Статус:</strong> Одобрен</li>
+                            </ul>
+                            <div class="form-actions">
+                                <button class="cta-button primary">Редактирай</button>
+                                <button class="cta-button secondary">Изтрий</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="cta-button primary" style="margin-top: 20px;">Добави отбор</button>
+                </div>
+
+                <div class="tab-content" id="registrations">
+                    <h2>Моите регистрации</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Турнир</th>
+                                <th>Отбор</th>
+                                <th>Дата</th>
+                                <th>Статус</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>TikTok CS 1.6 Турнир</td>
+                                <td>FireStorm</td>
+                                <td>03.05.2025</td>
+                                <td>Чакащ</td>
+                                <td>
+                                    <button class="cta-button primary">Виж</button>
+                                    <button class="cta-button secondary">Откажи</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>CS<span>Турнири</span></h3>
+                    <p>Организираме професионални CS 1.6 турнири и работим за развитието на гейминг общността в България.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Бързи връзки</h3>
+                    <ul>
+                        <li><a href="index.html">Начало</a></li>
+                        <li><a href="#">Турнир</a></li>
+                        <li><a href="#">Отбори</a></li>
+                        <li><a href="#">Правила</a></li>
+                        <li><a href="#">Регистрация</a></li>
+                        <li><a href="#">Контакти</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact">
+                    <h3>Контакти</h3>
+                    <p><i class="fas fa-envelope"></i> [email protected]</p>
+                    <p><i class="fas fa-phone"></i> +359 88 123 4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> София, България</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 TikTok CS 1.6 Турнир – BG | Всички права запазени</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Phone number validation
+            const phoneForm = document.getElementById('phone-form');
+            phoneForm.addEventListener('submit', (e) => {
+                const newPhone = document.getElementById('new-phone').value;
+                const phonePattern = /^\+359[0-9]{8}$/;
+                if (!phonePattern.test(newPhone)) {
+                    e.preventDefault();
+                    alert('Моля, въведете валиден телефонен номер във формат +359XXXXXXXX');
+                }
+            });
+
+            // Social media form validation
+            const socialForm = document.getElementById('social-form');
+            socialForm.addEventListener('submit', (e) => {
+                const twitter = document.getElementById('twitter').value;
+                const twitch = document.getElementById('twitch').value;
+                const youtube = document.getElementById('youtube').value;
+                const facebook = document.getElementById('facebook').value;
+
+                const twitterPattern = /^@?[a-zA-Z0-9_]{1,15}$/;
+                const twitchPattern = /^(https?:\/\/)?twitch\.tv\/[a-zA-Z0-9_]+$/i;
+                const youtubePattern = /^(https?:\/\/)?youtube\.com\/@?[a-zA-Z0-9_-]+$/i;
+                const facebookPattern = /^(https?:\/\/)?facebook\.com\/[a-zA-Z0-9._-]+$/i;
+
+                if (twitter && !twitterPattern.test(twitter)) {
+                    e.preventDefault();
+                    alert('Моля, въведете валиден Twitter потребител (напр. @username)');
+                }
+                if (twitch && !twitchPattern.test(twitch)) {
+                    e.preventDefault();
+                    alert('Моля, въведете валиден Twitch URL (напр. twitch.tv/username)');
+                }
+                if (youtube && !youtubePattern.test(youtube)) {
+                    e.preventDefault();
+                    alert('Моля, въведете валиден YouTube URL (напр. youtube.com/@username)');
+                }
+                if (facebook && !facebookPattern.test(facebook)) {
+                    e.preventDefault();
+                    alert('Моля, въведете валиден Facebook URL (напр. facebook.com/username)');
+                }
+            });
+
+            // Avatar upload and preview
+            const avatarInput = document.getElementById('avatar-upload');
+            const avatarPreview = document.getElementById('avatar-preview');
+            const currentAvatar = document.getElementById('current-avatar');
+            const avatarForm = document.getElementById('avatar-form');
+
+            avatarInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const fileSizeMB = file.size / (1024 * 1024);
+                    const validTypes = ['image/png', 'image/jpeg'];
+                    if (!validTypes.includes(file.type)) {
+                        alert('Моля, изберете файл във формат PNG или JPEG.');
+                        avatarInput.value = '';
+                        return;
+                    }
+                    if (fileSizeMB > 2) {
+                        alert('Файлът е твърде голям. Максимален размер: 2MB.');
+                        avatarInput.value = '';
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        avatarPreview.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            avatarForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const file = avatarInput.files[0];
+                if (!file) {
+                    alert('Моля, изберете изображение за аватар.');
+                    return;
+                }
+                // Simulate successful upload
+                alert('Аватарът е успешно обновен!');
+                currentAvatar.src = avatarPreview.src;
+                avatarForm.reset();
+                avatarPreview.src = currentAvatar.src;
+            });
+        });
+    </script>
+</body>
+</html>

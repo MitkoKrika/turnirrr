@@ -1228,7 +1228,7 @@ footer::before {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 5px;
-    color: var(--light-color);
+    color: #1be8d4; /* Променете цвета на текста в падащите менюта */
     font-family: 'Saira Condensed', sans-serif;
     transition: var(--transition);
 }

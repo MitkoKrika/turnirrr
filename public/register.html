@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Създай акаунт за TikTok CS 1.6 Турнир – BG и се присъедини към гейминг общността!">
+    <title>Създай Акаунт - TikTok CS 1.6 Турнир</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo"><span>TikTok</span> CS 1.6</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Начало</a></li>
+                    <li><a href="tournament.html">Турнир</a></li>
+                    <li><a href="teams.html">Отбори</a></li>
+                    <li><a href="rules.html">Правила</a></li>
+                    <li><a href="register.html">Регистрация</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                    <li><a href="signup.html" class="active">Създай Акаунт</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="registration">
+        <div class="container">
+            <h2>Създай Акаунт</h2>
+            <div class="registration-form-container">
+                <div class="form-section">
+                    <h3>Твоят Профил</h3>
+                    <div class="form-group">
+                        <label for="username">Потребителско Име <span class="required">*</span></label>
+                        <input type="text" id="username" name="username" placeholder="Въведи потребителско име" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Имейл <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="Въведи имейл" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tiktok">TikTok Профил</label>
+                        <div class="social-input">
+                            <i class="fab fa-tiktok"></i>
+                            <input type="text" id="tiktok" name="tiktok" placeholder="@потребител">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="discord">Discord ID</label>
+                        <div class="social-input">
+                            <i class="fab fa-discord"></i>
+                            <input type="text" id="discord" name="discord" placeholder="Потребител#1234">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Парола <span class="required">*</span></label>
+                        <input type="password" id="password" name="password" placeholder="Въведи парола" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Потвърди Парола <span class="required">*</span></label>
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Потвърди парола" required>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">Съгласен съм с <a href="rules.html">Условията за ползване</a> <span class="required">*</span></label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="cta-button primary">Създай Акаунт</button>
+                    </div>
+                </div>
+                <div class="registration-note">
+                    <h3><i class="fas fa-info-circle"></i> Важна Информация</h3>
+                    <p>Полетата, отбелязани с <span class="required">*</span>, са задължителни.</p>
+                    <p>Вече имаш акаунт? <a href="login.html">Влез тук</a>.</p>
+                    <p>Следи ни в TikTok за ексклузивни новини и събития!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>За Нас</h3>
+                <p>Организираме професионални CS 1.6 турнири и работим за развитието на гейминг общността в България.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitch"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Бързи Връзки</h3>
+                <ul>
+                    <li><a href="index.html">Начало</a></li>
+                    <li><a href="tournament.html">Турнир</a></li>
+                    <li><a href="teams.html">Отбори</a></li>
+                    <li><a href="rules.html">Правила</a></li>
+                    <li><a href="register.html">Регистрация</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Контакти</h3>
+                <p><i class="fas fa-envelope"></i> info@csturnir.bg</p>
+                <p><i class="fas fa-phone"></i> +359 88 123 4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> София, България</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TikTok CS 1.6 Турнир – BG | Всички права запазени</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -6,7 +6,7 @@ import { initContactForm } from './forms/contactForm.js';
 import { setupScrollAnimations, setupFaqToggles, setupCollapsibles } from './animations.js';
 import { loadTournamentDetails } from './tournament.js';
 import { loadTeams } from './teams.js';
-import { loadLatestNews } from './api/index.js';
+import { loadNews, loadLatestNews } from './api/index.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     setupMobileNav();
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupScrollAnimations();
     setupFaqToggles();
     setupCollapsibles();
+    loadNews();
     loadLatestNews();
     loadTeams();
     loadTournamentDetails();

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Изход от TikTok CS 1.6 Турнир – BG. Върнете се към началната страница.">
+    <title>Изход - TikTok CS 1.6 Турнир</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo"><span>TikTok</span> CS 1.6</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Начало</a></li>
+                    <li><a href="tournament.html">Турнир</a></li>
+                    <li><a href="teams.html">Отбори</a></li>
+                    <li><a href="rules.html">Правила</a></li>
+                    <li><a href="register.html">Регистрация</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                    <li><a href="logout.html" class="active">Изход</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section style="padding: 80px 0;">
+        <div class="container">
+            <h2>Изход</h2>
+            <div class="success-message">
+                <p>Успешно излязохте от вашия акаунт.</p>
+                <p><a href="index.html" class="cta-button primary">Върни се към Началото</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>За Нас</h3>
+                <p>Организираме професионални CS 1.6 турнири и работим за развитието на гейминг общността в България.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitch"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Бързи Връзки</h3>
+                <ul>
+                    <li><a href="index.html">Начало</a></li>
+                    <li><a href="tournament.html">Турнир</a></li>
+                    <li><a href="teams.html">Отбори</a></li>
+                    <li><a href="rules.html">Правила</a></li>
+                    <li><a href="register.html">Регистрация</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Контакти</h3>
+                <p><i class="fas fa-envelope"></i> info@csturnir.bg</p>
+                <p><i class="fas fa-phone"></i> +359 88 123 4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> София, България</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TikTok CS 1.6 Турнир – BG | Всички права запазени</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

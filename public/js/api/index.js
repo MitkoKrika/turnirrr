@@ -114,3 +114,31 @@ export async function loadLatestNews() {
         </article>
     `).join('');
 }
+
+export async function loadNews() {
+    console.log('Loading news...');
+    const container = document.getElementById('news-section');
+    console.log('Loading news...');
+    const res = await fetch('/api/news/:id');
+    console.log('The news...');
+    if (!res.ok) throw new Error('Грешка при зареждане на новини');
+
+    const response = await res.json();
+    const news = response.data;
+
+    if (!container || !Array.isArray(news)) return;
+
+    container.innerHTML = news.map(item => `
+        <article class="news-item">
+            <div class="news-img">
+                <img src="${item.imageurl}" alt="${item.title}">
+            </div>
+            <div class="news-content">
+                <span class="date">${new Date(item.createdAt).toLocaleDateString('bg-BG')}</span>
+                <h3>${item.title}</h3>
+                <p>${item.content.substring(0, 100)}...</p>
+                <a href="#" class="read-more">Прочети повече</a>
+            </div>
+        </article>
+    `).join('');
+}
