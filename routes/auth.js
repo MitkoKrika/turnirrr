@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-router.post('login', async (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     if (!user || !(await bcrypt.compare(password, user.password))) {
@@ -16,6 +16,7 @@ router.post('login', async (req, res) => {
         process.env.TOKEN_SECRET, 
         { expiresIn: '1h' }
     );
+
     res.json({ token });
 });
 
