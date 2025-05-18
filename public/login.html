@@ -22,29 +22,45 @@
                  <button type="submit" class="btn btn-primary">Вход</button>
              </form>
          </div>
-         <script>
-             document.getElementById('loginForm').addEventListener('submit', async (e) => {
-                 e.preventDefault();
-                 const username = document.getElementById('username').value;
-                 const password = document.getElementById('password').value;
-                 try {
-                     const response = await fetch('/api/login', {
-                         method: 'POST',
-                         headers: { 'Content-Type': 'application/json' },
-                         body: JSON.stringify({ username, password })
-                     });
-                     if (response.ok) {
-                         const data = await response.json();
-                         localStorage.setItem('token', data.token);
-                         window.location.href = '/admin.html';
-                     } else {
-                         alert('Грешно потребителско име или парола');
-                     }
-                 } catch (error) {
-                     console.error('Грешка при вход:', error);
-                     alert('Възникна грешка при вход');
-                 }
-             });
-         </script>
+         <script type="module">
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const token = data.token;
+
+                localStorage.setItem('token', token);
+
+                // Декодиране на JWT token и извличане на ролята
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                const role = payload.role;
+
+                // Пренасочване според ролята
+                if (role === 'admin') {
+                    window.location.href = '/admin.html';
+                } else {
+                    window.location.href = '/dashboard.html';
+                }
+
+            } else {
+                alert('Грешно потребителско име или парола');
+            }
+        } catch (error) {
+            console.error('Грешка при вход:', error);
+            alert('Възникна грешка при вход');
+        }
+    });
+</script>
      </body>
      </html>

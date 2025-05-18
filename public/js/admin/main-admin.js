@@ -10,7 +10,7 @@ import { initSettingsSection } from './settings.js';
 import { initNewsAdmin } from './news.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // checkAdminAuth();               // Проверка на токена и евентуално показване на dashboard
+    checkAdminAuth();               // Проверка на токена и евентуално показване на dashboard
     setupAdminNavigation();         // Активиране на навигацията между секции
     initModals();                   // Управление на модалните прозорци
     setupListFilters();             // Активиране на търсене/филтриране в списъци
