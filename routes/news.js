@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { verifyToken, requireAdmin } = require('../midleware/authMiddleware');
 const News = require('../models/News');
 
 // Helper function for error handling
@@ -73,7 +74,7 @@ router.get('/api/news/latest', async (req, res) => {
 });
 
 // Get all news (admin)
-router.get('/admin', async (req, res) => {
+router.get('/admin', verifyToken, requireAdmin, async (req, res) => {
     try {
         const news = await News.find()
             .sort({ createdAt: -1 })

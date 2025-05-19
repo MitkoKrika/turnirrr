@@ -33,18 +33,22 @@ const userSchema = new mongoose.Schema({
     },
     team: {
         type: String,
+        default: 'None',
         required: true,
     },
     teamId: {
         type: String,
+        default: '0',
         required: true,
     },
     teamName: {
         type: String,
+        default: 'None',
         required: true,
     },
     teamRole: {
         type: String,
+        default: 'None', // values: leader, member
         required: true,
     },
     teamUsers: {
@@ -54,11 +58,14 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         required: true,
-        unique: true,
     },
     status: {
         type: String,
         default: 'active',
+    },
+    avatar: {
+        type: String,
+        default: '/img/default-avatar.png',
     },
 });
 
