@@ -1,3 +1,4 @@
+import { checkAuth } from '../auth.js';
 import { checkAdminAuth } from './auth.js';
 import { setupAdminNavigation } from './navigation.js';
 import { showDashboard } from './dashboard.js';
@@ -10,6 +11,7 @@ import { initSettingsSection } from './settings.js';
 import { initNewsAdmin } from './news.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    checkAuth('admin'); // Проверка на токена и евентуално пренасочване към admin.html
     checkAdminAuth();               // Проверка на токена и евентуално показване на dashboard
     setupAdminNavigation();         // Активиране на навигацията между секции
     initModals();                   // Управление на модалните прозорци

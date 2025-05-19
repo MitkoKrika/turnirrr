@@ -908,7 +908,8 @@ footer::before {
 }
 
 .tab-btn.active {
-    color: var(--secondary-color);
+  background-color: #222;
+  color: #fff;
 }
 
 .tab-btn.active::after {

@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="bg">
 <head>
@@ -412,5 +413,263 @@
             });
         });
     </script>
+    <script type="module" src="./js/dashboard.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CS Турнири – Профил</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html"><div class="logo">CS<span>Турнири</span></div></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/">Начало</a></li>
+          <li><a href="/tournaments.html">Турнири</a></li>
+          <li><a href="/teams.html">Отбори</a></li>
+          <li><a href="/rules.html">Правила</a></li>
+          <li><a href="/registration.html">Регистрация</a></li>
+          <li><a href="/constacts.html">Контакти</a></li>
+          <li><a href="/dashboard.html"><i class="fas fa-user"></i> Профил</a></li>
+          <li><a href="/login.html" id="logout-btn">Изход</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="dashboard-container tournament-details">
+    <div class="dashboard-sidebar">
+      <button class="tab-btn active" data-tab="profile-tab">👤 Профил</button>
+      <button class="tab-btn" data-tab="team-tab">🛡️ Отбор</button>
+      <button class="tab-btn" data-tab="settings-tab">⚙️ Настройки</button>
+    </div>
+
+    <div class="dashboard-content">
+      <section id="profile-tab" class="tab-content active">
+        <h2>👤 Профил</h2>
+        <div class="profile-summary">
+          <img id="current-avatar" src="/img/default-avatar.png" alt="Avatar" />
+          <h3 id="dashboard-name">Име Фамилия</h3>
+          <p>Потребител: <span id="dashboard-username">username</span></p>
+          <p>Email: <span id="dashboard-email">email@example.com</span></p>
+          <p>Роля: <span id="dashboard-role">user</span></p>
+        </div>
+
+        <form id="profile-form">
+          <h3>Редакция на профил</h3>
+          <label>Име: <input type="text" id="firstName" /></label>
+          <label>Фамилия: <input type="text" id="lastName" /></label>
+          <label>Email: <input type="email" id="email" /></label>
+          <label>Телефон: <input type="text" id="phone" /></label>
+          <label>Discord: <input type="text" id="discord" /></label>
+          <button type="submit">Запази</button>
+          <p id="form-message"></p>
+        </form>
+
+        <form id="avatar-form">
+  <h3>Смяна на аватар</h3>
+  <input type="file" id="avatar-upload" name="avatar" accept="image/png, image/jpeg"/>
+  <img id="avatar-preview" src="/img/default-avatar.png" alt="Preview" />
+  <button type="submit">Запази аватар</button>
+</form>
+      </section>
+      <section id="team-tab" class="tab-content">
+  <h2>🛡️ Отбор</h2>
+
+  <div id="team-status"></div>
+
+  <div id="team-forms">
+    <form id="create-team-form">
+      <h3>Създай отбор</h3>
+      <input type="text" id="team-name" placeholder="Име на отбора" required />
+      <button type="submit">Създай</button>
+    </form>
+
+    <form id="join-team-form">
+      <h3>Присъедини се към отбор</h3>
+      <input type="text" id="team-code" placeholder="Код за присъединяване" required />
+      <button type="submit">Присъедини се</button>
+    </form>
+  </div>
+
+  <div id="team-members" style="display:none;">
+    <h3>Членове на отбора</h3>
+    <ul id="team-member-list"></ul>
+  </div>
+</section>
+
+      <section id="settings-tab" class="tab-content">
+        <h2>⚙️ Настройки</h2>
+
+        <form id="phone-form">
+          <label>Нов телефон: <input type="text" id="new-phone" placeholder="+359XXXXXXXX" /></label>
+          <button type="submit">Обнови телефон</button>
+        </form>
+
+        <form id="social-form">
+          <label>Twitter: <input type="text" id="twitter" /></label>
+          <label>Twitch: <input type="text" id="twitch" /></label>
+          <label>YouTube: <input type="text" id="youtube" /></label>
+          <label>Facebook: <input type="text" id="facebook" /></label>
+          <button type="submit">Запази социални мрежи</button>
+        </form>
+        <hr />
+<h3>Смяна на парола</h3>
+<form id="password-form">
+  <label>Текуща парола:
+    <input type="password" id="current-password" required />
+  </label>
+  <label>Нова парола:
+    <input type="password" id="new-password" required />
+  </label>
+  <label>Потвърди новата парола:
+    <input type="password" id="confirm-password" required />
+  </label>
+  <button type="submit">Смени паролата</button>
+  <p id="password-message"></p>
+</form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>CS<span>Турнири</span></h3>
+                    <p>Организираме професионални CS 1.6 турнири и работим за развитието на гейминг общността в България.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Бързи връзки</h3>
+                    <ul>
+                        <li><a href="index.html">Начало</a></li>
+                        <li><a href="#">Турнир</a></li>
+                        <li><a href="#">Отбори</a></li>
+                        <li><a href="#">Правила</a></li>
+                        <li><a href="#">Регистрация</a></li>
+                        <li><a href="#">Контакти</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact">
+                    <h3>Контакти</h3>
+                    <p><i class="fas fa-envelope"></i> [email protected]</p>
+                    <p><i class="fas fa-phone"></i> +359 88 123 4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> София, България</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 TikTok CS 1.6 Турнир – BG | Всички права запазени</p>
+            </div>
+        </div>
+    </footer>
+
+  <!-- Табове, меню, аватар -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+
+          tab.classList.add('active');
+          document.getElementById(tab.dataset.tab).classList.add('active');
+        });
+      });
+
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+
+      const avatarInput = document.getElementById('avatar-upload');
+      const avatarPreview = document.getElementById('avatar-preview');
+      const currentAvatar = document.getElementById('current-avatar');
+      const avatarForm = document.getElementById('avatar-form');
+
+      if (avatarInput && avatarForm) {
+        avatarInput.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const fileSizeMB = file.size / (1024 * 1024);
+            const validTypes = ['image/png', 'image/jpeg'];
+            if (!validTypes.includes(file.type)) {
+              alert('Моля, качете PNG или JPEG файл.');
+              avatarInput.value = '';
+              return;
+            }
+            if (fileSizeMB > 2) {
+              alert('Файлът не трябва да е над 2MB.');
+              avatarInput.value = '';
+              return;
+            }
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              avatarPreview.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+        avatarForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const file = avatarInput.files[0];
+          if (!file) {
+            alert('Моля, изберете файл.');
+            return;
+          }
+          alert('✅ Аватарът е обновен!');
+          currentAvatar.src = avatarPreview.src;
+          avatarForm.reset();
+          avatarPreview.src = currentAvatar.src;
+        });
+      }
+    });
+  </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        tab.classList.add('active');
+        const target = tab.dataset.tab;
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  });
+</script>
+  <!-- Модулен JS за зареждане на потребител и записване -->
+  <script type="module">
+    import { checkAuth } from '/js/auth.js';
+    checkAuth();
+  </script>
+
+  <script type="module" src="/js/dashboard.js"></script>
 </body>
 </html>
